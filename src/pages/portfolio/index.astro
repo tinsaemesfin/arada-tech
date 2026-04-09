@@ -1,0 +1,85 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumbs from '@components/global/Breadcrumbs.astro';
+import CTA from '@components/global/CTA.astro';
+import { caseStudies } from '@data/portfolio';
+
+const breadcrumbs = [{ name: 'Portfolio', href: '/portfolio/' }];
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Portfolio - Our Work',
+  description: 'Explore Arada Tech\'s portfolio of successful software development projects including websites, web applications, and mobile apps for businesses in Ethiopia.',
+  url: new URL('/portfolio/', Astro.site).href,
+};
+---
+
+<BaseLayout
+  title="Portfolio | Our Work in Software Development"
+  description="Explore Arada Tech's portfolio of successful projects. See how we've helped businesses in Addis Ababa and Ethiopia with websites, web apps, mobile apps, and custom software."
+  structuredData={structuredData}
+  breadcrumbs={breadcrumbs}
+>
+  <Breadcrumbs items={breadcrumbs} />
+
+  <section class="section-padding pb-0">
+    <div class="section-container max-w-4xl mx-auto text-center">
+      <span class="text-sm font-semibold text-secondary-400 uppercase tracking-wider mb-3 block reveal-up">Our Portfolio</span>
+      <h1 class="heading-xl mb-6 reveal-up">Projects That Speak for Themselves</h1>
+      <p class="text-lg sm:text-xl text-neutral-600 leading-relaxed max-w-3xl mx-auto reveal-up">
+        Every project represents a real business challenge we solved. Browse our case studies to see how we deliver measurable results for our clients.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-gap">
+    <div class="section-padding">
+      <div class="section-container">
+        <div class="space-y-16 stagger-children">
+          {caseStudies.map((study, index) => (
+            <a href={`/portfolio/${study.slug}/`} class="group block">
+              <div class:list={['grid lg:grid-cols-2 gap-10 items-center', index % 2 !== 0 && 'lg:direction-rtl']}>
+                <div class="relative aspect-[4/3] rounded-2xl overflow-hidden bg-neutral-100">
+                  <div class="absolute inset-0 bg-gradient-to-br from-primary-500/80 to-primary-800/90 flex items-center justify-center">
+                    <span class="text-white font-display font-bold text-2xl">{study.client}</span>
+                  </div>
+                  <div class="absolute inset-0 bg-neutral-900/0 group-hover:bg-neutral-900/10 transition-colors duration-300"></div>
+                </div>
+                <div class="lg:direction-ltr">
+                  <span class="text-sm font-medium text-secondary-400 uppercase tracking-wider mb-2 block">{study.industry}</span>
+                  <h2 class="heading-md mb-3 group-hover:text-primary-500 transition-colors">{study.title}</h2>
+                  <p class="prose-content mb-6">{study.challenge.slice(0, 180)}...</p>
+                  <div class="flex flex-wrap gap-2 mb-6">
+                    {study.services.map((s) => (
+                      <span class="text-xs font-medium text-primary-600 bg-primary-50 px-3 py-1 rounded-full">{s}</span>
+                    ))}
+                  </div>
+                  <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+                    {study.results.slice(0, 4).map((r) => (
+                      <div>
+                        <div class="text-xl font-display font-bold text-primary-500">{r.value}</div>
+                        <div class="text-xs text-neutral-500">{r.metric}</div>
+                      </div>
+                    ))}
+                  </div>
+                  <span class="inline-flex items-center gap-1 text-sm font-semibold text-primary-500 group-hover:gap-2 transition-all">
+                    View full case study
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                  </span>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTA variant="gradient" title="Have a Project in Mind?" description="Let's discuss how we can help you achieve results like these." />
+</BaseLayout>
+
+<script>
+  import { initScrollAnimations } from '@scripts/scroll-animations';
+  initScrollAnimations();
+</script>

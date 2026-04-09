@@ -1,0 +1,262 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: #2a357d;
+    --color-secondary: #ef7b22;
+    --color-bg: #ffffff;
+    --color-text: #212529;
+    --color-text-muted: #495057;
+    --color-border: #dee2e6;
+    --header-height: 4.5rem;
+    --section-gap: clamp(4rem, 8vw, 8rem);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply font-sans text-neutral-900 bg-white;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-bold tracking-tight;
+  }
+
+  ::selection {
+    background-color: rgba(42, 53, 125, 0.15);
+    color: #2a357d;
+  }
+
+  img {
+    @apply max-w-full h-auto;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-container {
+    @apply max-w-7xl mx-auto;
+  }
+
+  .section-gap {
+    padding-top: var(--section-gap);
+    padding-bottom: var(--section-gap);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-secondary-400;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-300 cursor-pointer;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary-500 text-white hover:bg-primary-600 hover:shadow-lg hover:shadow-primary-500/25 active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply btn bg-secondary-400 text-white hover:bg-secondary-500 hover:shadow-lg hover:shadow-secondary-400/25 active:scale-[0.98];
+  }
+
+  .btn-outline {
+    @apply btn border-2 border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white active:scale-[0.98];
+  }
+
+  .btn-ghost {
+    @apply btn text-primary-500 hover:bg-primary-50 active:scale-[0.98];
+  }
+
+  .btn-lg {
+    @apply px-8 py-4 text-base;
+  }
+
+  .heading-xl {
+    @apply text-4xl sm:text-5xl lg:text-6.5xl font-bold leading-tight;
+  }
+
+  .heading-lg {
+    @apply text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight;
+  }
+
+  .heading-md {
+    @apply text-2xl sm:text-3xl font-bold leading-snug;
+  }
+
+  .heading-sm {
+    @apply text-xl sm:text-2xl font-bold leading-snug;
+  }
+
+  .prose-content {
+    @apply text-base sm:text-lg text-neutral-700 leading-relaxed;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl border border-neutral-200 p-6 sm:p-8 transition-all duration-300;
+  }
+
+  .card-hover {
+    @apply card hover:shadow-xl hover:shadow-neutral-900/5 hover:border-neutral-300 hover:-translate-y-1;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary) transparent;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   HERO SECTION
+   ══════════════════════════════════════════════════════════════ */
+
+.hero-title-line {
+  clip-path: inset(0 100% 0 0);
+}
+
+.hero-device {
+  will-change: transform, opacity;
+}
+
+.hero-browser.is-floating { animation: float-browser 7s ease-in-out infinite; }
+.hero-phone.is-floating   { animation: float-phone 5.5s ease-in-out infinite 0.5s; }
+.hero-code.is-floating    { animation: float-code 6s ease-in-out infinite 1s; }
+.hero-notification.is-floating { animation: float-notif 4.5s ease-in-out infinite 0.3s; }
+
+@keyframes float-browser {
+  0%, 100% { transform: rotateY(-8deg) rotateX(5deg) translateY(0); }
+  50%      { transform: rotateY(-8deg) rotateX(5deg) translateY(-14px); }
+}
+
+@keyframes float-phone {
+  0%, 100% { transform: rotateY(5deg) rotateX(-3deg) translateY(0); }
+  50%      { transform: rotateY(5deg) rotateX(-3deg) translateY(-10px); }
+}
+
+@keyframes float-code {
+  0%, 100% { transform: rotateY(-12deg) rotateX(8deg) translateY(0); }
+  50%      { transform: rotateY(-12deg) rotateX(8deg) translateY(-16px); }
+}
+
+@keyframes float-notif {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
+.dash-bar {
+  transform-origin: bottom;
+  transform: scaleY(0);
+}
+
+.hero-browser.is-floating .dash-bar {
+  animation: grow-bar 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: var(--bar-delay, 0s);
+}
+
+@keyframes grow-bar {
+  to { transform: scaleY(1); }
+}
+
+@keyframes scroll-line-move {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(300%); }
+}
+
+.animate-scroll-line {
+  animation: scroll-line-move 2s ease-in-out infinite;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BLOG STYLES
+   ══════════════════════════════════════════════════════════════ */
+
+#reading-progress {
+  will-change: width;
+  background-size: 200% 100%;
+  animation: shimmer-progress 3s linear infinite;
+}
+
+@keyframes shimmer-progress {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+#toc-list .toc-link {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+
+.blog-card {
+  animation: blog-card-in 0.5s ease-out both;
+}
+
+@keyframes blog-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.prose h2,
+.prose h3 {
+  position: relative;
+}
+
+.prose h2:hover::before {
+  content: '#';
+  position: absolute;
+  left: -1.5rem;
+  color: var(--color-primary);
+  opacity: 0.3;
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .prose h2:hover::before {
+    display: none;
+  }
+}

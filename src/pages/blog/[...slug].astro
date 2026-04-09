@@ -1,0 +1,50 @@
+---
+import BlogLayout from '@layouts/BlogLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post, allPosts: posts },
+  }));
+}
+
+const { post, allPosts } = Astro.props;
+const { Content } = await render(post);
+
+const relatedPosts = allPosts
+  .filter((p) => p.id !== post.id)
+  .map((p) => {
+    let score = 0;
+    if (p.data.category === post.data.category) score += 3;
+    const sharedTags = p.data.tags.filter((t: string) => post.data.tags.includes(t));
+    score += sharedTags.length;
+    return { post: p, score };
+  })
+  .sort((a, b) => b.score - a.score || new Date(b.post.data.publishDate).valueOf() - new Date(a.post.data.publishDate).valueOf())
+  .slice(0, 3)
+  .map(({ post: p }) => ({
+    id: p.id,
+    title: p.data.title,
+    description: p.data.description,
+    category: p.data.category,
+    readTime: p.data.readTime,
+    publishDate: p.data.publishDate,
+  }));
+---
+
+<BlogLayout
+  title={post.data.title}
+  description={post.data.description}
+  publishDate={post.data.publishDate}
+  modifiedDate={post.data.modifiedDate}
+  author={post.data.author}
+  category={post.data.category}
+  tags={post.data.tags}
+  readTime={post.data.readTime}
+  ogImage={post.data.ogImage}
+  relatedPosts={relatedPosts}
+>
+  <Content />
+</BlogLayout>

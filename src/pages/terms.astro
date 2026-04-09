@@ -1,0 +1,76 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumbs from '@components/global/Breadcrumbs.astro';
+import { company } from '@data/company';
+
+const breadcrumbs = [{ name: 'Terms of Service', href: '/terms/' }];
+---
+
+<BaseLayout
+  title="Terms of Service"
+  description="Arada Tech's terms of service. Read about the terms and conditions that govern the use of our website and services."
+  breadcrumbs={breadcrumbs}
+>
+  <Breadcrumbs items={breadcrumbs} />
+
+  <article class="section-padding section-gap">
+    <div class="section-container max-w-3xl mx-auto prose prose-neutral prose-headings:font-display">
+      <h1>Terms of Service</h1>
+      <p class="text-sm text-neutral-500">Last updated: April 1, 2026</p>
+
+      <p>These Terms of Service ("Terms") govern your use of the {company.name} website at <a href={company.url}>{company.url}</a> and any services provided by {company.name} ("we," "us," or "our"). By accessing our website or engaging our services, you agree to these Terms.</p>
+
+      <h2>Services</h2>
+      <p>{company.name} provides software development services including website development, web application development, mobile app development, custom software development, and UI/UX design. All services are provided subject to a separate agreement or proposal that outlines scope, timeline, deliverables, and pricing.</p>
+
+      <h2>Use of Website</h2>
+      <p>You may use our website for lawful purposes only. You agree not to:</p>
+      <ul>
+        <li>Use the website in any way that violates applicable laws or regulations</li>
+        <li>Attempt to gain unauthorized access to our systems or data</li>
+        <li>Use the website to transmit malicious code or harmful content</li>
+        <li>Interfere with the proper functioning of the website</li>
+      </ul>
+
+      <h2>Intellectual Property</h2>
+      <p>All content on this website, including text, graphics, logos, icons, images, and software, is the property of {company.name} and is protected by intellectual property laws. You may not reproduce, distribute, or create derivative works from this content without our written permission.</p>
+
+      <h2>Project Agreements</h2>
+      <p>All software development projects are governed by individual project agreements. These agreements will specify:</p>
+      <ul>
+        <li>Project scope and deliverables</li>
+        <li>Timeline and milestones</li>
+        <li>Pricing and payment schedule</li>
+        <li>Intellectual property ownership of deliverables</li>
+        <li>Warranty and support terms</li>
+        <li>Confidentiality obligations</li>
+      </ul>
+
+      <h2>Payment Terms</h2>
+      <p>Payment terms are outlined in individual project agreements. Unless otherwise agreed, payments are due according to the milestone schedule specified in your project proposal.</p>
+
+      <h2>Limitation of Liability</h2>
+      <p>{company.name} shall not be liable for any indirect, incidental, special, or consequential damages arising from the use of our website or services. Our total liability for any claim shall not exceed the amount paid for the specific service giving rise to the claim.</p>
+
+      <h2>Warranties</h2>
+      <p>We provide a warranty period for completed projects as specified in individual project agreements. During this period, we will fix any bugs or defects in the delivered software at no additional cost.</p>
+
+      <h2>Termination</h2>
+      <p>Either party may terminate a project engagement as outlined in the project agreement. In case of termination, payment is due for all work completed up to the date of termination.</p>
+
+      <h2>Governing Law</h2>
+      <p>These Terms shall be governed by and construed in accordance with the laws of the Federal Democratic Republic of Ethiopia. Any disputes arising from these Terms shall be subject to the exclusive jurisdiction of the courts of Addis Ababa, Ethiopia.</p>
+
+      <h2>Changes to These Terms</h2>
+      <p>We reserve the right to modify these Terms at any time. Changes will be posted on this page with an updated "Last updated" date. Your continued use of the website after changes constitutes acceptance of the modified Terms.</p>
+
+      <h2>Contact Us</h2>
+      <p>If you have questions about these Terms, please contact us:</p>
+      <ul>
+        <li>Email: <a href={`mailto:${company.email}`}>{company.email}</a></li>
+        <li>Phone: <a href={`tel:${company.phoneRaw}`}>{company.phone}</a></li>
+        <li>Address: {company.address.street}, {company.address.city}, {company.address.country}</li>
+      </ul>
+    </div>
+  </article>
+</BaseLayout>

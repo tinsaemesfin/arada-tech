@@ -1,0 +1,53 @@
+---
+const steps = [
+  {
+    number: '01',
+    title: 'Discover',
+    description: 'We learn about your business, goals, users, and challenges to define the right approach.',
+  },
+  {
+    number: '02',
+    title: 'Design',
+    description: 'We create wireframes, prototypes, and visual designs that align with your brand and users\' needs.',
+  },
+  {
+    number: '03',
+    title: 'Develop',
+    description: 'We build your product with clean code, regular milestones, and transparent progress updates.',
+  },
+  {
+    number: '04',
+    title: 'Deploy & Support',
+    description: 'We launch your product, monitor performance, and provide ongoing maintenance and improvements.',
+  },
+];
+---
+
+<section class="section-gap bg-neutral-50">
+  <div class="section-padding">
+    <div class="section-container">
+      <div class="text-center max-w-2xl mx-auto mb-16 reveal-up">
+        <span class="text-sm font-semibold text-secondary-400 uppercase tracking-wider mb-3 block">How We Work</span>
+        <h2 class="heading-lg mb-4">A Proven Process for Delivering Results</h2>
+        <p class="prose-content">Every project follows our battle-tested process, ensuring predictable timelines, clear communication, and exceptional outcomes.</p>
+      </div>
+
+      <div class="relative">
+        {/* Connection line */}
+        <div class="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-neutral-200 -translate-y-1/2 line-grow"></div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 stagger-children">
+          {steps.map((step) => (
+            <div class="relative text-center lg:text-center group">
+              <div class="relative z-10 w-16 h-16 rounded-2xl bg-white border-2 border-primary-500 flex items-center justify-center mx-auto mb-6 group-hover:bg-primary-500 transition-colors duration-300">
+                <span class="font-display font-bold text-primary-500 group-hover:text-white transition-colors duration-300">{step.number}</span>
+              </div>
+              <h3 class="text-lg font-bold text-neutral-900 mb-2">{step.title}</h3>
+              <p class="text-sm text-neutral-600 leading-relaxed">{step.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

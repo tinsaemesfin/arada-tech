@@ -1,0 +1,47 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  primaryText?: string;
+  primaryHref?: string;
+  secondaryText?: string;
+  secondaryHref?: string;
+  variant?: 'default' | 'dark' | 'gradient';
+}
+
+const {
+  title = "Ready to Build Something Great?",
+  description = "Let's discuss your project and find out how we can help you achieve your business goals through technology.",
+  primaryText = "Start a Project",
+  primaryHref = "/contact/",
+  secondaryText = "View Our Work",
+  secondaryHref = "/portfolio/",
+  variant = 'default',
+} = Astro.props;
+
+const bgClass = {
+  default: 'bg-neutral-50',
+  dark: 'bg-primary-500 text-white',
+  gradient: 'bg-gradient-to-br from-primary-500 via-primary-600 to-primary-800 text-white',
+}[variant];
+
+const titleClass = variant === 'default' ? 'text-neutral-900' : 'text-white';
+const descClass = variant === 'default' ? 'text-neutral-600' : 'text-white/80';
+const primaryBtnClass = variant === 'default' ? 'btn-primary' : 'btn bg-white text-primary-500 hover:bg-neutral-100 hover:shadow-lg active:scale-[0.98]';
+const secondaryBtnClass = variant === 'default' ? 'btn-outline' : 'btn border-2 border-white/30 text-white hover:bg-white/10 active:scale-[0.98]';
+---
+
+<section class={`${bgClass} section-gap`}>
+  <div class="section-padding">
+    <div class="section-container text-center max-w-3xl mx-auto">
+      <h2 class={`heading-lg ${titleClass} mb-4`}>{title}</h2>
+      <p class={`${descClass} text-lg mb-8`}>{description}</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href={primaryHref} class={`${primaryBtnClass} btn-lg`}>{primaryText}</a>
+        {secondaryText && (
+          <a href={secondaryHref} class={`${secondaryBtnClass} btn-lg`}>{secondaryText}</a>
+        )}
+      </div>
+    </div>
+  </div>
+</section>

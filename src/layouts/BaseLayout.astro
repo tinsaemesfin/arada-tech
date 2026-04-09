@@ -1,0 +1,46 @@
+---
+import SEOHead from '@components/global/SEOHead.astro';
+import Header from '@components/global/Header.astro';
+import Footer from '@components/global/Footer.astro';
+import '@/styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  ogType?: string;
+  canonicalUrl?: string;
+  noindex?: boolean;
+  article?: {
+    publishedTime: string;
+    modifiedTime?: string;
+    author: string;
+    section?: string;
+    tags?: string[];
+  };
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
+  breadcrumbs?: { name: string; href: string }[];
+}
+
+const props = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <SEOHead {...props} />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:btn-primary">
+      Skip to main content
+    </a>
+
+    <Header />
+
+    <main id="main-content" class="flex-1 pt-[var(--header-height)]">
+      <slot />
+    </main>
+
+    <Footer />
+  </body>
+</html>

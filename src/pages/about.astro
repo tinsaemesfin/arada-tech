@@ -1,0 +1,195 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumbs from '@components/global/Breadcrumbs.astro';
+import CTA from '@components/global/CTA.astro';
+import { company } from '@data/company';
+
+const breadcrumbs = [{ name: 'About', href: '/about/' }];
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'About Arada Tech',
+  description: 'Learn about Arada Tech, a software development company based in Addis Ababa, Ethiopia, delivering custom digital solutions since 2012.',
+  url: new URL('/about/', Astro.site).href,
+  mainEntity: {
+    '@type': 'Organization',
+    name: company.name,
+    url: company.url,
+  },
+};
+
+const values = [
+  { title: 'Quality Over Quantity', description: 'We take on fewer projects to give each one the attention it deserves. Every product we deliver reflects our highest standards.', icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z' },
+  { title: 'Radical Transparency', description: 'No black boxes. You see every milestone, every decision, every line of progress. Your project, your visibility.', icon: 'M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z' },
+  { title: 'Long-Term Partnerships', description: 'We build relationships, not just software. Over 80% of our clients have been with us for multiple projects over years.', icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z' },
+  { title: 'Continuous Improvement', description: 'Technology evolves fast. We invest in learning, adopt modern practices, and bring the latest proven solutions to every project.', icon: 'M13 10V3L4 14h7v7l9-11h-7z' },
+];
+
+const timeline = [
+  { year: '2012', title: 'Founded in Addis Ababa', description: 'Arada Tech was founded with a mission to bring world-class software development to Ethiopian businesses.' },
+  { year: '2015', title: 'First Major Enterprise Client', description: 'Secured our first large-scale enterprise project, building a complete business management system.' },
+  { year: '2018', title: 'Mobile Development Launch', description: 'Expanded our services to include mobile app development for iOS and Android platforms.' },
+  { year: '2020', title: 'Remote-First Operations', description: 'Adapted to serve clients globally while maintaining our Addis Ababa headquarters.' },
+  { year: '2023', title: '50+ Projects Milestone', description: 'Celebrated delivering over 50 successful projects across multiple industries in Ethiopia.' },
+  { year: '2026', title: 'AI-Driven Development', description: 'Integrating AI and modern tooling to deliver faster, smarter solutions for our clients.' },
+];
+---
+
+<BaseLayout
+  title="About Arada Tech | Software Development Company in Addis Ababa"
+  description="Arada Tech is a software development company based in Addis Ababa, Ethiopia. Since 2012, we've helped businesses build custom websites, web applications, mobile apps, and software solutions."
+  structuredData={structuredData}
+  breadcrumbs={breadcrumbs}
+>
+  <Breadcrumbs items={breadcrumbs} />
+
+  <!-- Hero -->
+  <section class="section-padding pb-0">
+    <div class="section-container max-w-4xl mx-auto text-center">
+      <span class="text-sm font-semibold text-secondary-400 uppercase tracking-wider mb-3 block reveal-up">About Us</span>
+      <h1 class="heading-xl mb-6 reveal-up">Building Software That Matters Since 2012</h1>
+      <p class="text-lg sm:text-xl text-neutral-600 leading-relaxed max-w-3xl mx-auto reveal-up">
+        We are a team of developers, designers, and strategists based in Addis Ababa, Ethiopia. We partner with businesses to turn ambitious ideas into reliable, beautiful digital products.
+      </p>
+    </div>
+  </section>
+
+  <!-- Story -->
+  <section class="section-gap">
+    <div class="section-padding">
+      <div class="section-container">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+          <div class="reveal-left">
+            <h2 class="heading-lg mb-6">Our Story</h2>
+            <div class="space-y-4 prose-content">
+              <p>
+                Arada Tech was founded by {company.ceo} in {company.foundedYear} with a clear vision: Ethiopian businesses deserve access to the same quality of software that powers companies anywhere in the world.
+              </p>
+              <p>
+                Starting from a small office in Addis Ababa, we grew by earning trust — one successful project at a time. We learned that the key to great software isn't just technical skill, but deeply understanding the business problems we're solving.
+              </p>
+              <p>
+                Today, we work with businesses across Ethiopia — from healthcare clinics to engineering firms, from startups to established enterprises. What has never changed is our commitment to quality, transparency, and genuine partnership with every client.
+              </p>
+            </div>
+          </div>
+          <div class="reveal-right">
+            <div class="bg-gradient-to-br from-primary-500 to-primary-700 rounded-3xl p-10 text-white relative overflow-hidden">
+              <div class="absolute top-0 right-0 w-32 h-32 bg-secondary-400/15 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+              <div class="grid grid-cols-2 gap-8">
+                <div class="text-center">
+                  <div class="text-4xl font-display font-bold mb-1" data-count="12+">12+</div>
+                  <div class="text-sm text-white/70">Years in Business</div>
+                </div>
+                <div class="text-center">
+                  <div class="text-4xl font-display font-bold mb-1" data-count="50+">50+</div>
+                  <div class="text-sm text-white/70">Projects Delivered</div>
+                </div>
+                <div class="text-center">
+                  <div class="text-4xl font-display font-bold mb-1" data-count="98%">98%</div>
+                  <div class="text-sm text-white/70">Client Satisfaction</div>
+                </div>
+                <div class="text-center">
+                  <div class="text-4xl font-display font-bold mb-1">5</div>
+                  <div class="text-sm text-white/70">Service Areas</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="section-gap bg-neutral-50">
+    <div class="section-padding">
+      <div class="section-container">
+        <div class="text-center max-w-2xl mx-auto mb-16 reveal-up">
+          <span class="text-sm font-semibold text-secondary-400 uppercase tracking-wider mb-3 block">Our Values</span>
+          <h2 class="heading-lg">What Guides Every Decision We Make</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 stagger-children">
+          {values.map((value) => (
+            <div class="card-hover">
+              <div class="flex gap-4">
+                <div class="w-12 h-12 rounded-xl bg-primary-50 flex items-center justify-center shrink-0">
+                  <svg class="w-6 h-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={value.icon} />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-lg font-bold text-neutral-900 mb-2">{value.title}</h3>
+                  <p class="text-neutral-600 leading-relaxed">{value.description}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="section-gap">
+    <div class="section-padding">
+      <div class="section-container max-w-3xl mx-auto">
+        <div class="text-center mb-16 reveal-up">
+          <span class="text-sm font-semibold text-secondary-400 uppercase tracking-wider mb-3 block">Our Journey</span>
+          <h2 class="heading-lg">Milestones Along the Way</h2>
+        </div>
+
+        <div class="relative">
+          <div class="absolute left-[19px] top-0 bottom-0 w-0.5 bg-neutral-200 line-grow"></div>
+
+          <div class="space-y-10 stagger-children">
+            {timeline.map((item) => (
+              <div class="flex gap-6 relative">
+                <div class="w-10 h-10 rounded-full bg-primary-500 flex items-center justify-center shrink-0 z-10">
+                  <span class="text-xs font-bold text-white">{item.year}</span>
+                </div>
+                <div class="pt-1">
+                  <h3 class="font-bold text-neutral-900 mb-1">{item.title}</h3>
+                  <p class="text-sm text-neutral-600 leading-relaxed">{item.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="section-gap bg-neutral-50">
+    <div class="section-padding">
+      <div class="section-container text-center max-w-2xl mx-auto">
+        <span class="text-sm font-semibold text-secondary-400 uppercase tracking-wider mb-3 block reveal-up">Leadership</span>
+        <h2 class="heading-lg mb-12 reveal-up">Led by Experience</h2>
+
+        <div class="reveal-scale">
+          <img src="/images/tinsae-avatar.webp" alt={company.ceo} class="w-24 h-24 rounded-2xl object-cover mx-auto mb-6 shadow-lg" loading="lazy" />
+          <h3 class="text-xl font-bold text-neutral-900">{company.ceo}</h3>
+          <p class="text-secondary-400 font-medium mb-4">Founder & CEO</p>
+          <p class="text-neutral-600 leading-relaxed max-w-lg mx-auto">
+            With over a decade of experience in software development and a deep commitment to the Ethiopian tech ecosystem, Tinsae leads Arada Tech's mission to deliver technology that drives real business growth.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTA
+    variant="gradient"
+    title="Let's Build Your Next Project Together"
+    description="Whether you're starting from scratch or scaling an existing product, we're here to help."
+  />
+</BaseLayout>
+
+<script>
+  import { initScrollAnimations, initCountUp } from '@scripts/scroll-animations';
+  initScrollAnimations();
+  initCountUp();
+</script>

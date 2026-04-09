@@ -1,0 +1,68 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '@components/global/Breadcrumbs.astro';
+import CTA from '@components/global/CTA.astro';
+import type { Service } from '@data/services';
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+
+const breadcrumbs = [
+  { name: 'Services', href: '/services/' },
+  { name: service.title, href: service.href },
+];
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: service.metaTitle,
+    description: service.metaDescription,
+    url: new URL(service.href, Astro.site).href,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: service.title,
+    description: service.description,
+    provider: {
+      '@type': 'Organization',
+      name: 'Arada Tech',
+      url: 'https://www.aradatech.com',
+    },
+    areaServed: {
+      '@type': 'City',
+      name: 'Addis Ababa',
+      containedInPlace: { '@type': 'Country', name: 'Ethiopia' },
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: service.faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  },
+];
+---
+
+<BaseLayout
+  title={service.metaTitle}
+  description={service.metaDescription}
+  structuredData={structuredData}
+  breadcrumbs={breadcrumbs}
+>
+  <Breadcrumbs items={breadcrumbs} />
+
+  <slot />
+
+  <CTA variant="gradient" />
+</BaseLayout>

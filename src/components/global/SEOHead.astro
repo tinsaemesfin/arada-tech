@@ -1,0 +1,121 @@
+---
+import { company, siteConfig } from '@data/company';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  ogType?: string;
+  canonicalUrl?: string;
+  noindex?: boolean;
+  article?: {
+    publishedTime: string;
+    modifiedTime?: string;
+    author: string;
+    section?: string;
+    tags?: string[];
+  };
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
+  breadcrumbs?: { name: string; href: string }[];
+}
+
+const {
+  title,
+  description,
+  ogImage = siteConfig.defaultOgImage,
+  ogType = 'website',
+  canonicalUrl,
+  noindex = false,
+  article,
+  structuredData,
+  breadcrumbs,
+} = Astro.props;
+
+const isHomepage = Astro.url.pathname === '/';
+const fullTitle = isHomepage
+  ? 'Arada Tech | Software Development Company in Addis Ababa, Ethiopia'
+  : title === siteConfig.title
+    ? title
+    : siteConfig.titleTemplate.replace('%s', title);
+const canonical = canonicalUrl || new URL(Astro.url.pathname, Astro.site).href;
+const ogImageUrl = ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro.site).href;
+
+const breadcrumbSchema = breadcrumbs && breadcrumbs.length > 0
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: breadcrumbs.map((item, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: item.name,
+        item: new URL(item.href, Astro.site).href,
+      })),
+    }
+  : null;
+
+const allStructuredData = [
+  ...(Array.isArray(structuredData) ? structuredData : structuredData ? [structuredData] : []),
+  ...(breadcrumbSchema ? [breadcrumbSchema] : []),
+];
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content={Astro.generator} />
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+<meta property="og:type" content={ogType} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:url" content={canonical} />
+<meta property="og:site_name" content={siteConfig.title} />
+<meta property="og:locale" content={siteConfig.locale} />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageUrl} />
+
+{article && (
+  <>
+    <meta property="article:published_time" content={article.publishedTime} />
+    {article.modifiedTime && <meta property="article:modified_time" content={article.modifiedTime} />}
+    <meta property="article:author" content={article.author} />
+    {article.section && <meta property="article:section" content={article.section} />}
+    {article.tags?.map((tag) => <meta property="article:tag" content={tag} />)}
+  </>
+)}
+
+<link rel="icon" href="/images/favicons/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png" />
+<link rel="manifest" href="/images/favicons/site.webmanifest" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+  rel="stylesheet"
+/>
+
+<meta name="theme-color" content="#2a357d" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QQFLT5F53H"></script>
+<script is:inline>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-QQFLT5F53H');
+</script>
+
+{allStructuredData.map((data) => (
+  <script type="application/ld+json" set:html={JSON.stringify(data)} />
+))}

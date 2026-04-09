@@ -1,0 +1,31 @@
+---
+interface Props {
+  animation?: 'up' | 'left' | 'right' | 'scale' | 'clip';
+  class?: string;
+  tag?: string;
+  stagger?: boolean;
+}
+
+const {
+  animation = 'up',
+  class: className = '',
+  tag = 'div',
+  stagger = false,
+} = Astro.props;
+
+const Tag = tag;
+
+const animClass = stagger
+  ? 'stagger-children'
+  : {
+      up: 'reveal-up',
+      left: 'reveal-left',
+      right: 'reveal-right',
+      scale: 'reveal-scale',
+      clip: 'clip-reveal',
+    }[animation];
+---
+
+<Tag class={`${animClass} ${className}`}>
+  <slot />
+</Tag>

@@ -1,0 +1,115 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumbs from '@components/global/Breadcrumbs.astro';
+import CTA from '@components/global/CTA.astro';
+
+const breadcrumbs = [{ name: 'FAQ', href: '/faq/' }];
+
+const faqs = [
+  {
+    category: 'General',
+    items: [
+      { question: 'What services does Arada Tech offer?', answer: 'We offer website development, web application development, mobile app development (iOS and Android), custom software development, and UI/UX design services. Our team handles everything from initial concept and design through development, deployment, and ongoing maintenance.' },
+      { question: 'Where is Arada Tech located?', answer: 'We are based in Bole Atlas, Addis Ababa, Ethiopia. While our office is in Addis Ababa, we work with clients across Ethiopia and internationally.' },
+      { question: 'How long has Arada Tech been in business?', answer: 'Arada Tech was founded in 2012. We have over 12 years of experience delivering software solutions for businesses across multiple industries in Ethiopia.' },
+    ],
+  },
+  {
+    category: 'Projects & Process',
+    items: [
+      { question: 'How long does a typical project take?', answer: 'Project timelines depend on complexity. A simple website typically takes 4-6 weeks. Web applications range from 8-16 weeks. Mobile apps take 8-20 weeks. Custom software projects vary based on scope. We provide detailed timelines during the proposal phase.' },
+      { question: 'What is your development process?', answer: 'We follow a four-phase process: Discovery (understanding your business needs), Design (creating wireframes and visual designs), Development (building and testing iteratively), and Deployment & Support (launching and maintaining your product). We provide regular updates throughout.' },
+      { question: 'Do you provide project estimates before starting?', answer: 'Yes. After an initial consultation where we understand your requirements, we provide a detailed proposal with scope, timeline, and pricing. This consultation is free and comes with no obligation.' },
+      { question: 'Can I see progress during development?', answer: 'Absolutely. We believe in transparency. You will receive regular progress updates, and we set up staging environments where you can review the work at every milestone before we proceed.' },
+    ],
+  },
+  {
+    category: 'Technical',
+    items: [
+      { question: 'What technologies do you work with?', answer: 'We work with modern technologies including React, Next.js, Astro, Node.js, Python, React Native, Flutter, PostgreSQL, MongoDB, AWS, and more. We choose the best technology stack for each project based on your specific requirements.' },
+      { question: 'Do you handle hosting and deployment?', answer: 'Yes. We can help you choose the right hosting solution, set everything up, and manage deployment. We work with shared hosting, VPS, cloud providers (AWS, Google Cloud), and other hosting environments.' },
+      { question: 'Can you integrate with existing systems?', answer: 'Yes. We regularly build solutions that integrate with existing databases, APIs, ERP systems, payment gateways, and third-party services. We design clean APIs to ensure seamless integration.' },
+      { question: 'Do you provide ongoing maintenance and support?', answer: 'Yes. We offer maintenance and support packages that include bug fixes, security updates, performance monitoring, and feature enhancements. We are committed to keeping your software running smoothly after launch.' },
+    ],
+  },
+  {
+    category: 'Pricing & Payments',
+    items: [
+      { question: 'How much does a project cost?', answer: 'Costs vary based on project complexity, features, and timeline. We provide detailed proposals after understanding your needs. We work with businesses of all sizes and can find solutions that fit your budget. Contact us for a free consultation and estimate.' },
+      { question: 'What are your payment terms?', answer: 'We typically structure payments in milestones: an initial deposit to begin work, progress payments at key milestones, and a final payment upon project completion. This protects both parties and aligns incentives.' },
+      { question: 'Do you offer any guarantees?', answer: 'Yes. We provide a warranty period after launch during which we fix any bugs at no additional cost. We also offer satisfaction guarantees — we work with you until you are happy with the result.' },
+    ],
+  },
+];
+
+const allFaqItems = faqs.flatMap((cat) => cat.items);
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: allFaqItems.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+  })),
+};
+---
+
+<BaseLayout
+  title="FAQ | Frequently Asked Questions About Our Services"
+  description="Find answers to common questions about Arada Tech's software development services, project process, pricing, technologies, and support in Addis Ababa, Ethiopia."
+  structuredData={structuredData}
+  breadcrumbs={breadcrumbs}
+>
+  <Breadcrumbs items={breadcrumbs} />
+
+  <section class="section-padding pb-0">
+    <div class="section-container max-w-4xl mx-auto text-center">
+      <span class="text-sm font-semibold text-secondary-400 uppercase tracking-wider mb-3 block reveal-up">FAQ</span>
+      <h1 class="heading-xl mb-6 reveal-up">Frequently Asked Questions</h1>
+      <p class="text-lg text-neutral-600 leading-relaxed max-w-3xl mx-auto reveal-up">
+        Have a question? Find quick answers below, or <a href="/contact/" class="text-primary-500 hover:underline">contact us directly</a> for anything specific.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-gap">
+    <div class="section-padding">
+      <div class="section-container max-w-3xl mx-auto">
+        {faqs.map((category) => (
+          <div class="mb-12 last:mb-0">
+            <h2 class="heading-sm mb-6 reveal-up">{category.category}</h2>
+            <div class="space-y-3 stagger-children">
+              {category.items.map((faq) => (
+                <details class="card group">
+                  <summary class="flex items-center justify-between cursor-pointer list-none">
+                    <h3 class="font-semibold text-neutral-900 pr-8">{faq.question}</h3>
+                    <svg class="w-5 h-5 text-neutral-400 shrink-0 transition-transform group-open:rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                  </summary>
+                  <p class="mt-4 text-neutral-600 leading-relaxed">{faq.answer}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTA
+    variant="gradient"
+    title="Still Have Questions?"
+    description="We're happy to help. Get in touch and we'll respond within 24 hours."
+    primaryText="Contact Us"
+    primaryHref="/contact/"
+    secondaryText="View Services"
+    secondaryHref="/services/"
+  />
+</BaseLayout>
+
+<script>
+  import { initScrollAnimations } from '@scripts/scroll-animations';
+  initScrollAnimations();
+</script>

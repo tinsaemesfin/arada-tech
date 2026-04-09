@@ -1,0 +1,54 @@
+{
+  "$ref": "#/definitions/blog",
+  "definitions": {
+    "blog": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "publishDate": {
+          "type": "string"
+        },
+        "modifiedDate": {
+          "type": "string"
+        },
+        "author": {
+          "type": "string",
+          "default": "Tinsae Mesfin"
+        },
+        "category": {
+          "type": "string",
+          "default": "Technology"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "readTime": {
+          "type": "string",
+          "default": "5 min read"
+        },
+        "ogImage": {
+          "type": "string"
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "description",
+        "publishDate"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

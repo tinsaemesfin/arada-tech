@@ -1,0 +1,16 @@
+---
+import ServiceLayout from '@layouts/ServiceLayout.astro';
+import ServicePageContent from '@components/services/ServicePageContent.astro';
+import { services } from '@data/services';
+
+const service = services.find((s) => s.slug === 'website-development')!;
+---
+
+<ServiceLayout service={service}>
+  <ServicePageContent service={service} />
+</ServiceLayout>
+
+<script>
+  import { initScrollAnimations } from '@scripts/scroll-animations';
+  initScrollAnimations();
+</script>

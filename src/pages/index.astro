@@ -1,0 +1,149 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import HeroSection from '@components/home/HeroSection.astro';
+import ServicesGrid from '@components/home/ServicesGrid.astro';
+import WhyChooseUs from '@components/home/WhyChooseUs.astro';
+import ProcessSection from '@components/home/ProcessSection.astro';
+import PortfolioShowcase from '@components/home/PortfolioShowcase.astro';
+import TestimonialsSection from '@components/home/TestimonialsSection.astro';
+import BlogPreview from '@components/home/BlogPreview.astro';
+import CTA from '@components/global/CTA.astro';
+import MobileQuickNav from '@components/home/MobileQuickNav.astro';
+import { brandAssets, company, siteConfig } from '@data/company';
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: company.name,
+    url: company.url,
+    description: company.description,
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: `${company.url}/blog/?q={search_term_string}`,
+      'query-input': 'required name=search_term_string',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: company.name,
+    legalName: company.legalName,
+    url: company.url,
+    logo: `${company.url}${brandAssets.fullLogo}`,
+    description: company.description,
+    foundingDate: String(company.foundedYear),
+    founder: {
+      '@type': 'Person',
+      name: company.ceo,
+    },
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: company.address.street,
+      addressLocality: company.address.city,
+      addressCountry: company.address.countryCode,
+      postalCode: company.address.postalCode,
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: company.geo.latitude,
+      longitude: company.geo.longitude,
+    },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: company.phone,
+      contactType: 'customer service',
+      email: company.email,
+      availableLanguage: ['English', 'Amharic'],
+    },
+    sameAs: Object.values(company.social).filter(Boolean),
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Software Development Services',
+      itemListElement: [
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Website Development' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Web Application Development' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Mobile App Development' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Custom Software Development' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'UI/UX Design' } },
+      ],
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    '@id': `${company.url}/#local-business`,
+    name: company.name,
+    description: company.description,
+    url: company.url,
+    telephone: company.phone,
+    email: company.email,
+    image: `${company.url}${brandAssets.fullLogo}`,
+    priceRange: '$$',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: company.address.street,
+      addressLocality: company.address.city,
+      addressCountry: company.address.countryCode,
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: company.geo.latitude,
+      longitude: company.geo.longitude,
+    },
+    openingHoursSpecification: [
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        opens: '09:00',
+        closes: '19:00',
+      },
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Saturday'],
+        opens: '10:00',
+        closes: '14:00',
+      },
+    ],
+    areaServed: [
+      { '@type': 'City', name: 'Addis Ababa' },
+      { '@type': 'Country', name: 'Ethiopia' },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Arada Tech"
+  description="Arada Tech is a software development company in Addis Ababa, Ethiopia. We build custom websites, web applications, mobile apps, and software solutions that drive business growth."
+  structuredData={structuredData}
+>
+  <HeroSection />
+
+  {/* Mobile: compact quick-nav replaces heavy sections */}
+  <MobileQuickNav />
+
+  {/* Desktop: full sections (hidden on mobile) */}
+  <div class="hidden md:block">
+    <ServicesGrid />
+    <WhyChooseUs />
+    <ProcessSection />
+    <PortfolioShowcase />
+    <TestimonialsSection />
+    <BlogPreview />
+  </div>
+
+  <CTA variant="gradient" />
+</BaseLayout>
+
+<script>
+  import { initScrollAnimations, initCountUp, initHeroAnimations, initMagneticButtons, initTiltCards } from '@scripts/scroll-animations';
+  import { initSmoothScroll } from '@scripts/smooth-scroll';
+
+  initSmoothScroll();
+  initHeroAnimations();
+  initScrollAnimations();
+  initCountUp();
+  initMagneticButtons();
+  initTiltCards();
+</script>
