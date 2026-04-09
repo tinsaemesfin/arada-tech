@@ -35,29 +35,57 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit;
 }
 
-// Configure recipient -- UPDATE THIS EMAIL
-$to = 'qmesfin@gmail.com'; // TODO: Update with your preferred email
+// ── Resend API Configuration ──
+$RESEND_API_KEY = 'YOUR_RESEND_API_KEY'; // Replace with your Resend API key (starts with re_)
+$TO_EMAIL       = 'qmesfin@gmail.com';
+$FROM_EMAIL     = 'Arada Tech <noreply@aradatech.com>';
 
 $subject = "New Inquiry from {$name} - Arada Tech Website";
 
-$body = "You have received a new inquiry from your website.\n\n";
-$body .= "Name: {$name}\n";
-$body .= "Email: {$email}\n";
-$body .= "Phone: {$phone}\n";
-$body .= "Service: {$service}\n\n";
-$body .= "Message:\n{$message}\n\n";
-$body .= "---\n";
-$body .= "Sent from: aradatech.com contact form\n";
-$body .= "Time: " . date('Y-m-d H:i:s') . "\n";
-$body .= "IP: " . $_SERVER['REMOTE_ADDR'] . "\n";
+$html  = "<h2>New Contact Form Submission</h2>";
+$html .= "<table style='border-collapse:collapse;width:100%;max-width:600px;font-family:sans-serif;'>";
+$html .= "<tr><td style='padding:8px 12px;border-bottom:1px solid #eee;color:#666;width:120px;'><strong>Name</strong></td><td style='padding:8px 12px;border-bottom:1px solid #eee;'>{$name}</td></tr>";
+$html .= "<tr><td style='padding:8px 12px;border-bottom:1px solid #eee;color:#666;'><strong>Email</strong></td><td style='padding:8px 12px;border-bottom:1px solid #eee;'><a href='mailto:{$email}'>{$email}</a></td></tr>";
+$html .= "<tr><td style='padding:8px 12px;border-bottom:1px solid #eee;color:#666;'><strong>Phone</strong></td><td style='padding:8px 12px;border-bottom:1px solid #eee;'>{$phone}</td></tr>";
+$html .= "<tr><td style='padding:8px 12px;border-bottom:1px solid #eee;color:#666;'><strong>Service</strong></td><td style='padding:8px 12px;border-bottom:1px solid #eee;'>{$service}</td></tr>";
+$html .= "</table>";
+$html .= "<div style='margin-top:16px;padding:16px;background:#f9f9f9;border-radius:8px;font-family:sans-serif;'>";
+$html .= "<strong style='color:#666;'>Message:</strong><br><br>{$message}";
+$html .= "</div>";
+$html .= "<hr style='margin-top:24px;border:none;border-top:1px solid #eee;'>";
+$html .= "<p style='font-size:12px;color:#999;font-family:sans-serif;'>Sent from aradatech.com contact form &bull; " . date('Y-m-d H:i:s') . "</p>";
 
-$headers = "From: noreply@aradatech.com\r\n";
-$headers .= "Reply-To: {$email}\r\n";
-$headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+$payload = json_encode([
+    'from'     => $FROM_EMAIL,
+    'to'       => [$TO_EMAIL],
+    'subject'  => $subject,
+    'html'     => $html,
+    'reply_to' => $email,
+]);
 
-$sent = mail($to, $subject, $body, $headers);
+$ch = curl_init('https://api.resend.com/emails');
+curl_setopt_array($ch, [
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_POST           => true,
+    CURLOPT_POSTFIELDS     => $payload,
+    CURLOPT_HTTPHEADER     => [
+        'Authorization: Bearer ' . $RESEND_API_KEY,
+        'Content-Type: application/json',
+    ],
+]);
 
-if ($sent) {
+$response = curl_exec($ch);
+$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+$curlError = curl_error($ch);
+curl_close($ch);
+
+if ($curlError) {
+    http_response_code(500);
+    echo json_encode(['success' => false, 'message' => 'Unable to send the message. Please try again or email us directly.']);
+    exit;
+}
+
+if ($httpCode >= 200 && $httpCode < 300) {
     echo json_encode(['success' => true, 'message' => 'Your message has been sent successfully!']);
 } else {
     http_response_code(500);

@@ -42,17 +42,31 @@ No Node.js runtime is needed on the server.
 2. Upload the ZIP to `public_html/`
 3. Extract using cPanel File Manager's "Extract" feature
 
-## Contact Form Setup
+## Contact Form Setup (Resend)
 
-The contact form uses PHP `mail()`. No database is required.
+The contact form uses [Resend](https://resend.com) for reliable email delivery. Free tier: 3,000 emails/month, no credit card required.
 
+### Step 1: Create a Resend account
+1. Go to [resend.com](https://resend.com) and sign up (free)
+2. No credit card needed
+
+### Step 2: Add and verify your domain
+1. In the Resend dashboard, go to **Domains** → **Add Domain**
+2. Enter `aradatech.com`
+3. Resend will give you DNS records to add (MX, TXT for SPF/DKIM)
+4. Add these records in your **cPanel → Zone Editor** (or wherever you manage DNS)
+5. Click **Verify** in Resend — it may take a few minutes to propagate
+
+### Step 3: Get your API key
+1. In the Resend dashboard, go to **API Keys** → **Create API Key**
+2. Give it a name like "Arada Tech Contact Form"
+3. Copy the key (starts with `re_`)
+
+### Step 4: Update contact.php
 1. Open `contact.php` in `public_html/`
-2. Update the `$to` variable with your preferred email address
-3. Test the form by submitting from the contact page
-4. If emails are not received, check your cPanel email configuration:
-   - Go to cPanel > Email Deliverability
-   - Ensure SPF and DKIM records are configured
-   - Check spam/junk folder
+2. Replace `YOUR_RESEND_API_KEY` with your actual API key
+3. Update `$TO_EMAIL` if you want to receive emails at a different address
+4. Test the form by submitting from the contact page
 
 ## SSL Certificate
 
