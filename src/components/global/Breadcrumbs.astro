@@ -13,7 +13,7 @@ const { items } = Astro.props;
 const allItems = [{ name: 'Home', href: '/' }, ...items];
 ---
 
-<nav aria-label="Breadcrumb" class="section-padding py-4">
+<nav aria-label="Breadcrumb" class="section-padding pt-2 pb-2 sm:pt-3 sm:pb-3 lg:py-4">
   <div class="section-container">
     <ol class="flex items-center gap-2 text-sm text-neutral-500 flex-wrap">
       {allItems.map((item, index) => (

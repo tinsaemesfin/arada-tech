@@ -1,6 +1,6 @@
 ---
 title: "Mobile-First Design: Why It Matters for Ethiopian Businesses"
-description: "With mobile internet usage dominating in Ethiopia, learn why mobile-first design is essential and how it impacts your business outcomes."
+description: "Mobile-first design in Ethiopia: why it matters for traffic, conversions, and SEO. Practical takeaways for businesses in Addis Ababa."
 publishDate: "2026-02-12"
 author: "Tinsae Mesfin"
 category: "Design"

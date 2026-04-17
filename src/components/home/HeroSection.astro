@@ -4,37 +4,39 @@ import { company } from '@data/company';
 const barHeights = [40, 65, 45, 80, 55, 70, 90, 60, 75, 85, 50, 95];
 ---
 
-<section id="hero" class="relative min-h-[calc(100vh-var(--header-height))] overflow-hidden bg-white">
-
-  <!-- Main content -->
-  <div class="hero-content relative z-10 min-h-[calc(100vh-var(--header-height))] flex flex-col justify-center section-padding">
+<section id="hero" class="relative min-h-0 lg:min-h-[calc(100vh-var(--header-height))] overflow-hidden bg-white">
+  <!-- Main content: on mobile, height follows content so the blue section below sits closer -->
+  <div class="hero-content relative z-10 min-h-0 lg:min-h-[calc(100vh-var(--header-height))] flex flex-col justify-start pt-4 pb-4 sm:pb-5 sm:pt-5 lg:justify-center lg:pt-0 lg:pb-0 section-padding">
     <div class="section-container">
       <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
         <!-- Text column -->
         <div class="lg:col-span-6">
-          <div class="hero-badge inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-primary-100 bg-primary-50/80 mb-8 opacity-0">
-            <span class="relative flex h-2 w-2">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary-400 opacity-75"></span>
+          <div class="hero-badge inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-primary-100 bg-primary-50/80 mb-5 sm:mb-6 lg:mb-8 opacity-100 lg:opacity-0">
+            <span class="relative flex h-2 w-2 shrink-0">
+              <span class="hidden lg:block animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary-400 opacity-75" aria-hidden="true"></span>
               <span class="relative inline-flex rounded-full h-2 w-2 bg-secondary-400"></span>
             </span>
-            <span class="text-sm font-medium text-primary-500">Software Development Company in Addis Ababa</span>
+            <span class="text-sm font-medium text-primary-600">Software Development Company in Addis Ababa</span>
           </div>
 
-          <h1 class="mb-8">
-            <span class="hero-title-line block text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display font-bold text-neutral-900 leading-[1.08] mb-3">
+          <h1 class="mb-6 lg:mb-8">
+            <span class="hero-title-line block text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display font-bold text-neutral-900 leading-[1.08] mb-3 max-lg:[clip-path:inset(0_0_0_0)]">
               We Build Digital Products
             </span>
-            <span class="hero-title-line block text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display font-bold leading-[1.08]">
+            <span class="hero-title-line block text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display font-bold leading-[1.08] max-lg:[clip-path:inset(0_0_0_0)]">
               <span class="text-gradient">That Drive Growth</span>
             </span>
           </h1>
 
-          <p class="hero-description text-lg sm:text-xl text-neutral-500 leading-relaxed mb-10 max-w-xl opacity-0">
-            {company.name} designs, develops, and deploys custom websites, web applications, mobile apps, and software solutions for businesses in Ethiopia and beyond.
+          <p class="lg:hidden text-base text-neutral-900 leading-relaxed mb-8 max-w-xl">
+            Custom websites, web apps, and mobile software for businesses in Ethiopia. Based in {company.address.city} since {company.foundedYear}.
+          </p>
+          <p class="hero-description hidden lg:block text-lg sm:text-xl text-neutral-900 leading-relaxed mb-10 max-w-xl opacity-100 lg:opacity-0">
+            {company.name} is a software development company headquartered in {company.address.city}, {company.address.country}, founded in {company.foundedYear}. We design, build, and deploy custom websites, web apps, mobile apps, and software for businesses in Ethiopia and beyond.
           </p>
 
-          <div class="hero-ctas flex flex-col sm:flex-row gap-4 mb-14 opacity-0">
+          <div class="hero-ctas flex flex-col sm:flex-row gap-4 mb-10 lg:mb-14 opacity-100 lg:opacity-0">
             <a href="/contact/" class="btn-secondary btn-lg magnetic-btn group">
               <span>Start Your Project</span>
               <svg class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -49,16 +51,16 @@ const barHeights = [40, 65, 45, 80, 55, 70, 90, 60, 75, 85, 50, 95];
             </a>
           </div>
 
-          <div class="hero-trust flex flex-wrap items-center gap-x-8 gap-y-3 opacity-0">
-            <div class="flex items-center gap-2 text-neutral-400 text-sm">
+          <div class="hero-trust flex flex-wrap items-center gap-x-8 gap-y-3 opacity-100 lg:opacity-0">
+            <div class="flex items-center gap-2 text-neutral-700 text-sm">
               <div class="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
               <span>Since {company.foundedYear}</span>
             </div>
-            <div class="flex items-center gap-2 text-neutral-400 text-sm">
+            <div class="flex items-center gap-2 text-neutral-700 text-sm">
               <div class="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
               <span>50+ Projects Delivered</span>
             </div>
-            <div class="flex items-center gap-2 text-neutral-400 text-sm">
+            <div class="flex items-center gap-2 text-neutral-700 text-sm">
               <div class="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
               <span>Based in Addis Ababa</span>
             </div>
@@ -66,7 +68,7 @@ const barHeights = [40, 65, 45, 80, 55, 70, 90, 60, 75, 85, 50, 95];
         </div>
 
         <!-- Floating device mockups (desktop) -->
-        <div class="hidden lg:block lg:col-span-6 relative">
+        <div class="hero-devices-lg hidden lg:block lg:col-span-6 relative">
           <div class="hero-devices relative [perspective:1200px]">
 
             <!-- Browser / Dashboard -->
@@ -215,8 +217,8 @@ const barHeights = [40, 65, 45, 80, 55, 70, 90, 60, 75, 85, 50, 95];
     </div>
   </div>
 
-  <!-- Scroll indicator -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-10">
+  <!-- Scroll indicator (desktop only — no motion on small screens) -->
+  <div class="hidden lg:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-3 z-10" aria-hidden="true">
     <span class="text-[10px] uppercase tracking-[0.25em] text-neutral-300 font-medium">Scroll</span>
     <div class="w-px h-12 relative overflow-hidden">
       <div class="absolute inset-0 bg-neutral-200"></div>

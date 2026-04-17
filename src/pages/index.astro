@@ -9,7 +9,36 @@ import TestimonialsSection from '@components/home/TestimonialsSection.astro';
 import BlogPreview from '@components/home/BlogPreview.astro';
 import CTA from '@components/global/CTA.astro';
 import MobileQuickNav from '@components/home/MobileQuickNav.astro';
-import { brandAssets, company, siteConfig } from '@data/company';
+import { brandAssets, company } from '@data/company';
+import { services } from '@data/services';
+
+const orgId = `${company.url}/#organization`;
+
+const primaryNavItems = [
+  { name: 'Home', path: '/' },
+  { name: 'About', path: '/about/' },
+  { name: 'Services', path: '/services/' },
+  ...services.map((s) => ({ name: s.title, path: s.href })),
+  { name: 'Portfolio', path: '/portfolio/' },
+  { name: 'Blog', path: '/blog/' },
+  { name: 'Contact', path: '/contact/' },
+  { name: 'FAQ', path: '/faq/' },
+];
+
+const navigationItemList = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Primary site navigation',
+  itemListElement: primaryNavItems.map((item, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'SiteNavigationElement',
+      name: item.name,
+      url: new URL(item.path, Astro.site).href,
+    },
+  })),
+};
 
 const structuredData = [
   {
@@ -18,15 +47,26 @@ const structuredData = [
     name: company.name,
     url: company.url,
     description: company.description,
+    publisher: { '@id': orgId },
     potentialAction: {
       '@type': 'SearchAction',
       target: `${company.url}/blog/?q={search_term_string}`,
       'query-input': 'required name=search_term_string',
     },
   },
+  navigationItemList,
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': `${company.url}/#ceo`,
+    name: company.ceo,
+    jobTitle: 'Chief Executive Officer',
+    worksFor: { '@id': orgId },
+  },
   {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': orgId,
     name: company.name,
     legalName: company.legalName,
     url: company.url,
@@ -60,13 +100,19 @@ const structuredData = [
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: 'Software Development Services',
-      itemListElement: [
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Website Development' } },
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Web Application Development' } },
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Mobile App Development' } },
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Custom Software Development' } },
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'UI/UX Design' } },
-      ],
+      itemListElement: services.map((s) => {
+        const serviceUrl = new URL(s.href, Astro.site).href;
+        return {
+          '@type': 'Offer',
+          url: serviceUrl,
+          itemOffered: {
+            '@type': 'Service',
+            name: s.title,
+            description: s.tagline,
+            url: serviceUrl,
+          },
+        };
+      }),
     },
   },
   {
@@ -115,7 +161,7 @@ const structuredData = [
 
 <BaseLayout
   title="Arada Tech"
-  description="Arada Tech is a software development company in Addis Ababa, Ethiopia. We build custom websites, web applications, mobile apps, and software solutions that drive business growth."
+  description="Custom websites, web apps, mobile apps, and business software in Addis Ababa, Ethiopia. Arada Tech — software development since 2012. Book a free consultation."
   structuredData={structuredData}
 >
   <HeroSection />

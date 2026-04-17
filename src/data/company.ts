@@ -3,7 +3,7 @@ export const company = {
   legalName: 'Arada Tech Software Development',
   tagline: 'We Build Digital Products That Drive Growth',
   description:
-    'Arada Tech is a software development company based in Addis Ababa, Ethiopia, specializing in website development, web application development, mobile app development, custom software solutions, and UI/UX design.',
+    'Arada Tech is a software development company in Addis Ababa, Ethiopia. Websites, web apps, mobile apps, custom software, and UI/UX design for businesses since 2012.',
   foundedYear: 2012,
   ceo: 'Tinsae Mesfin',
   email: 'qmesfin@gmail.com', // TODO: confirm email

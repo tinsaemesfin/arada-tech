@@ -194,14 +194,22 @@ export function initCountUp() {
 
 export function initHeroAnimations() {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isMobileHero = window.matchMedia('(max-width: 1023px)').matches;
 
   if (reduced) {
     gsap.set('.hero-badge, .hero-description, .hero-ctas, .hero-trust', { opacity: 1 });
     gsap.set('.hero-title-line', { clipPath: 'inset(0 0% 0 0)' });
-    gsap.set('.hero-device', { opacity: 1 });
-    document.querySelectorAll('.hero-device').forEach(el =>
+    gsap.set('.hero-devices-lg .hero-device', { opacity: 1 });
+    document.querySelectorAll('.hero-devices-lg .hero-device').forEach(el =>
       (el as HTMLElement).classList.add('is-floating')
     );
+    return;
+  }
+
+  const heroContent = document.querySelector('.hero-content');
+
+  /* Mobile / tablet: static hero — no GSAP entrance, no scroll-parallax fade */
+  if (isMobileHero) {
     return;
   }
 
@@ -232,13 +240,13 @@ export function initHeroAnimations() {
     { opacity: 1, y: 0, duration: 0.6 },
     1.5,
   )
-  .fromTo('.hero-device',
+  .fromTo('.hero-devices-lg .hero-device',
     { opacity: 0, scale: 0.85, y: 40 },
     {
       opacity: 1, scale: 1, y: 0, duration: 1.2, stagger: 0.15,
       ease: 'power3.out',
       onComplete: () => {
-        document.querySelectorAll('.hero-device').forEach(el =>
+        document.querySelectorAll('.hero-devices-lg .hero-device').forEach(el =>
           (el as HTMLElement).classList.add('is-floating')
         );
       },
@@ -246,7 +254,6 @@ export function initHeroAnimations() {
     0.8,
   );
 
-  const heroContent = document.querySelector('.hero-content');
   if (heroContent) {
     gsap.to(heroContent, {
       y: -100,

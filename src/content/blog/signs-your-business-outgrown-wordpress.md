@@ -1,6 +1,6 @@
 ---
 title: "5 Signs Your Business Has Outgrown Its WordPress Website"
-description: "Recognizing when your WordPress site is holding your business back — and what modern alternatives can do for your growth."
+description: "Signs your WordPress site is limiting growth — and when to move to a custom web app or headless stack. Guidance for Ethiopian businesses."
 publishDate: "2026-02-28"
 author: "Tinsae Mesfin"
 category: "Business"

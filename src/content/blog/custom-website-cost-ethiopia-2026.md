@@ -1,6 +1,6 @@
 ---
 title: "How Much Does a Custom Website Cost in Ethiopia? A 2026 Guide"
-description: "A comprehensive guide to website development pricing in Ethiopia. Learn what factors influence cost, typical price ranges, and how to get the best value for your investment."
+description: "Website pricing in Ethiopia (2026): what drives cost, typical ranges, and how to compare proposals. Practical guide for Addis Ababa businesses from Arada Tech."
 publishDate: "2026-03-15"
 author: "Tinsae Mesfin"
 category: "Business"

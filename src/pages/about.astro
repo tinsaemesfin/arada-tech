@@ -14,8 +14,10 @@ const structuredData = {
   url: new URL('/about/', Astro.site).href,
   mainEntity: {
     '@type': 'Organization',
+    '@id': `${company.url}/#organization`,
     name: company.name,
     url: company.url,
+    founder: { '@type': 'Person', name: company.ceo },
   },
 };
 
@@ -38,7 +40,7 @@ const timeline = [
 
 <BaseLayout
   title="About Arada Tech | Software Development Company in Addis Ababa"
-  description="Arada Tech is a software development company based in Addis Ababa, Ethiopia. Since 2012, we've helped businesses build custom websites, web applications, mobile apps, and software solutions."
+  description="About Arada Tech: software development in Addis Ababa since 2012. Custom websites, web apps, mobile apps, and digital products for businesses in Ethiopia and beyond."
   structuredData={structuredData}
   breadcrumbs={breadcrumbs}
 >
@@ -50,7 +52,7 @@ const timeline = [
       <span class="text-sm font-semibold text-secondary-400 uppercase tracking-wider mb-3 block reveal-up">About Us</span>
       <h1 class="heading-xl mb-6 reveal-up">Building Software That Matters Since 2012</h1>
       <p class="text-lg sm:text-xl text-neutral-600 leading-relaxed max-w-3xl mx-auto reveal-up">
-        We are a team of developers, designers, and strategists based in Addis Ababa, Ethiopia. We partner with businesses to turn ambitious ideas into reliable, beautiful digital products.
+        Arada Tech is a software development company in Addis Ababa, Ethiopia, led by {company.ceo}. Since {company.foundedYear}, our developers, designers, and strategists have partnered with businesses to ship reliable, user-centered digital products.
       </p>
     </div>
   </section>

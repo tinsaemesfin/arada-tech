@@ -26,18 +26,19 @@ const structuredData = [
   {
     '@context': 'https://schema.org',
     '@type': 'Service',
+    '@id': new URL(service.href, Astro.site).href + '#service',
     name: service.title,
     description: service.description,
+    url: new URL(service.href, Astro.site).href,
     provider: {
       '@type': 'Organization',
       name: 'Arada Tech',
       url: 'https://www.aradatech.com',
     },
-    areaServed: {
-      '@type': 'City',
-      name: 'Addis Ababa',
-      containedInPlace: { '@type': 'Country', name: 'Ethiopia' },
-    },
+    areaServed: [
+      { '@type': 'City', name: 'Addis Ababa' },
+      { '@type': 'Country', name: 'Ethiopia' },
+    ],
   },
   {
     '@context': 'https://schema.org',

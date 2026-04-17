@@ -1,6 +1,6 @@
 ---
 title: "The Complete Guide to UI/UX Design for Ethiopian Startups"
-description: "Learn why great UI/UX design is critical for Ethiopian startups, how to approach the design process, and what to look for in a design partner."
+description: "UI/UX for Ethiopian startups: why research and iteration matter, process basics, and how to pick a design partner. From Arada Tech, Addis Ababa."
 publishDate: "2026-03-01"
 author: "Tinsae Mesfin"
 category: "Design"

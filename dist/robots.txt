@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
+Allow: /images/
+Allow: /_assets/
 
 Disallow: /404.html
 

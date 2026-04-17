@@ -104,6 +104,9 @@ ErrorDocument 404 /404.html
   # Referrer Policy
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
 
+  # HSTS (HTTPS only — safe after HTTPS redirect above)
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
   # Permissions Policy
   Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
 

@@ -2,6 +2,7 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Breadcrumbs from '@components/global/Breadcrumbs.astro';
 import CTA from '@components/global/CTA.astro';
+import { company } from '@data/company';
 
 const breadcrumbs = [{ name: 'FAQ', href: '/faq/' }];
 
@@ -9,6 +10,8 @@ const faqs = [
   {
     category: 'General',
     items: [
+      { question: 'What is Arada Tech?', answer: 'Arada Tech is a software development company headquartered in Addis Ababa, Ethiopia. We design and build custom websites, web applications, mobile apps, custom business software, and UI/UX for organizations in Ethiopia and internationally.' },
+      { question: 'Who is the CEO of Arada Tech?', answer: `${company.ceo} is the chief executive of Arada Tech. The company was founded in ${company.foundedYear} and operates from ${company.address.street}, ${company.address.city}.` },
       { question: 'What services does Arada Tech offer?', answer: 'We offer website development, web application development, mobile app development (iOS and Android), custom software development, and UI/UX design services. Our team handles everything from initial concept and design through development, deployment, and ongoing maintenance.' },
       { question: 'Where is Arada Tech located?', answer: 'We are based in Bole Atlas, Addis Ababa, Ethiopia. While our office is in Addis Ababa, we work with clients across Ethiopia and internationally.' },
       { question: 'How long has Arada Tech been in business?', answer: 'Arada Tech was founded in 2012. We have over 12 years of experience delivering software solutions for businesses across multiple industries in Ethiopia.' },
@@ -57,7 +60,7 @@ const structuredData = {
 
 <BaseLayout
   title="FAQ | Frequently Asked Questions About Our Services"
-  description="Find answers to common questions about Arada Tech's software development services, project process, pricing, technologies, and support in Addis Ababa, Ethiopia."
+  description="FAQ: Arada Tech services, timelines, pricing, tech stack, and support. Software development company in Addis Ababa, Ethiopia — answers in one place."
   structuredData={structuredData}
   breadcrumbs={breadcrumbs}
 >

@@ -1,6 +1,6 @@
 ---
 title: "Building a Mobile App for Your Ethiopian Business: Native vs Cross-Platform in 2026"
-description: "Should your Ethiopian business build a native or cross-platform mobile app? Compare React Native, Flutter, and native development to make the right choice."
+description: "Native vs cross-platform apps in Ethiopia: React Native, Flutter, and native iOS/Android compared. Choose the right stack for your product."
 publishDate: "2026-02-05"
 author: "Tinsae Mesfin"
 category: "Technology"

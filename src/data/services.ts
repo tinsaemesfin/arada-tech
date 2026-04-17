@@ -178,6 +178,7 @@ export const services: Service[] = [
       { question: 'How do you measure design success?', answer: 'We measure design success through usability metrics, conversion rates, task completion rates, user satisfaction scores, and business KPIs. Good design is measurable and directly impacts your bottom line.' },
     ],
     metaTitle: 'UI/UX Design Services in Addis Ababa | Arada Tech',
-    metaDescription: 'Professional UI/UX design services in Addis Ababa, Ethiopia. User research, wireframing, prototyping, and high-fidelity design for web and mobile. Let\'s talk.',
+    metaDescription:
+      'UI/UX design in Addis Ababa: user research, wireframes, prototypes, and high-fidelity web and mobile interfaces. Arada Tech — book a consultation.',
   },
 ];

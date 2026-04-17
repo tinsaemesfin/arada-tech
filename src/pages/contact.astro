@@ -11,12 +11,26 @@ const structuredData = {
   name: 'Contact Arada Tech',
   description: 'Get in touch with Arada Tech for software development, website design, and mobile app development in Addis Ababa, Ethiopia.',
   url: new URL('/contact/', Astro.site).href,
+  mainEntity: {
+    '@type': 'Organization',
+    '@id': `${company.url}/#organization`,
+    name: company.name,
+    url: company.url,
+    email: company.email,
+    telephone: company.phone,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: company.address.street,
+      addressLocality: company.address.city,
+      addressCountry: company.address.countryCode,
+    },
+  },
 };
 ---
 
 <BaseLayout
   title="Contact Us | Get a Free Consultation"
-  description="Contact Arada Tech for a free consultation on website development, web applications, mobile apps, custom software, and UI/UX design in Addis Ababa, Ethiopia."
+  description="Contact Arada Tech in Addis Ababa: free consultation for websites, web apps, mobile apps, custom software, and UI/UX. We reply within one business day."
   structuredData={structuredData}
   breadcrumbs={breadcrumbs}
 >

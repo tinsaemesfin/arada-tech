@@ -147,7 +147,8 @@ export const caseStudies: CaseStudy[] = [
       role: 'Managing Director, Viatech Electro-Mechanical',
     },
     metaTitle: 'Viatech Electro-Mechanical Case Study | Arada Tech Portfolio',
-    metaDescription: 'How Arada Tech built a modern website for Viatech Electro-Mechanical that increased B2B inquiries by 180% and reduced page load time to 1.8 seconds.',
+    metaDescription:
+      'Viatech Electro-Mechanical website: faster performance, stronger B2B inquiries, modern UX. Engineering firm case study by Arada Tech, Addis Ababa.',
   },
   {
     slug: 'yeha-dental-clinic',
@@ -172,7 +173,8 @@ export const caseStudies: CaseStudy[] = [
       role: 'Founder, Yeha Dental Clinic',
     },
     metaTitle: 'Yeha Dental Clinic Case Study | Arada Tech Portfolio',
-    metaDescription: 'How Arada Tech helped Yeha Dental Clinic achieve top 3 Google rankings in Addis Ababa and increase online appointment requests by 320%.',
+    metaDescription:
+      'Yeha Dental Clinic: local SEO, online appointments, and a trustworthy healthcare website. Case study by Arada Tech in Addis Ababa, Ethiopia.',
   },
   {
     slug: 'getpros-platform',
@@ -197,6 +199,7 @@ export const caseStudies: CaseStudy[] = [
       role: 'CEO, GetPros',
     },
     metaTitle: 'GetPros Platform Case Study | Arada Tech Portfolio',
-    metaDescription: 'How Arada Tech designed and built the GetPros marketplace platform — web app, mobile apps, and backend — from concept to launch in 14 weeks.',
+    metaDescription:
+      'GetPros marketplace: web app, mobile apps, and backend shipped in 14 weeks. Ethiopian startup case study by Arada Tech, Addis Ababa.',
   },
 ];
