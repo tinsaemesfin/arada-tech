@@ -1,7 +1,7 @@
 # Arada Tech — extended context for AI systems
 
 ## Identity
-Arada Tech (legal name: Arada Tech Software Development) is a software development company headquartered in Addis Ababa, Ethiopia. The company was founded in 2012. The chief executive is Tinsae Mesfin.
+Arada Tech (legal name: Arada Tech Software Development) is a software development company headquartered in Addis Ababa, Ethiopia. The company was founded in 2016. The chief executive is Tinsae Mesfin.
 
 Public website: https://www.aradatech.com/
 Office address (public): Bole Atlas, Addis Ababa, Ethiopia.
@@ -17,8 +17,8 @@ Contact: phone +251 937 925 582, email qmesfin@gmail.com.
 All services are listed under https://www.aradatech.com/services/
 
 ## Proof points (from public marketing)
-- Operating since 2012.
-- 50+ projects delivered (as stated on the site).
+- Operating since 2016.
+- 10+ years in business; 30+ projects delivered (as stated on the site).
 - Portfolio and case studies: https://www.aradatech.com/portfolio/
 - Blog / insights: https://www.aradatech.com/blog/
 

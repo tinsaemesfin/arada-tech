@@ -11,6 +11,8 @@ export interface CaseStudy {
   testimonial?: { quote: string; author: string; role: string };
   metaTitle: string;
   metaDescription: string;
+  /** Hero / card image under `public/` (e.g. `/images/portfolio/slug.png`). */
+  coverImage?: string;
   /** Homepage portfolio: order 1–3 shows this project in the featured row (first three slots). */
   featuredRank?: 1 | 2 | 3;
 }
@@ -36,6 +38,7 @@ export const caseStudies: CaseStudy[] = [
     metaTitle: 'Arada Clear — Invoice Clearing Platform | Arada Tech Portfolio',
     metaDescription:
       'Arada Clear: a clearinghouse platform for bulk invoice upload, validation, and algorithm-driven clearing built by Arada Tech.',
+    coverImage: '/images/portfolio/Arada-clear.png',
     featuredRank: 1,
   },
   {
@@ -58,6 +61,7 @@ export const caseStudies: CaseStudy[] = [
     metaTitle: 'Human Resource Management System (HRMS) | Arada Tech Portfolio',
     metaDescription:
       'End-to-end HRMS with customizable payroll, attendance, performance management, and employee lifecycle tools by Arada Tech.',
+    coverImage: '/images/portfolio/HRMS.png',
     featuredRank: 2,
   },
   {
@@ -80,6 +84,7 @@ export const caseStudies: CaseStudy[] = [
     metaTitle: 'Real Estate After-Sales Management System | Arada Tech Portfolio',
     metaDescription:
       'After-sales platform for real estate: complaint handling, collections, and operational control beyond the sales website.',
+    coverImage: '/images/portfolio/realstate-manegemnt.png',
     featuredRank: 3,
   },
   {
@@ -102,6 +107,7 @@ export const caseStudies: CaseStudy[] = [
     metaTitle: 'Local Loop Mercy — Invoice Cleaning Service | Arada Tech Portfolio',
     metaDescription:
       'Local Loop Mercy: invoice collection, cleaning, and handoff to a clearing service — engineered with Arada Tech.',
+    coverImage: '/images/portfolio/local-loop.png',
   },
   {
     slug: 'clinic-hospital-management',
@@ -123,6 +129,7 @@ export const caseStudies: CaseStudy[] = [
     metaTitle: 'Clinic & Hospital Management System | Arada Tech Portfolio',
     metaDescription:
       'Hospital and clinic management with patient workflows, laboratory integration, and medical data management by Arada Tech.',
+    coverImage: '/images/portfolio/clinic-manegemnt.png',
   },
   {
     slug: 'viatech-electromechanical',
@@ -149,6 +156,7 @@ export const caseStudies: CaseStudy[] = [
     metaTitle: 'Viatech Electro-Mechanical Case Study | Arada Tech Portfolio',
     metaDescription:
       'Viatech Electro-Mechanical website: faster performance, stronger B2B inquiries, modern UX. Engineering firm case study by Arada Tech, Addis Ababa.',
+    coverImage: '/images/portfolio/viatech.png',
   },
   {
     slug: 'yeha-dental-clinic',
@@ -175,6 +183,7 @@ export const caseStudies: CaseStudy[] = [
     metaTitle: 'Yeha Dental Clinic Case Study | Arada Tech Portfolio',
     metaDescription:
       'Yeha Dental Clinic: local SEO, online appointments, and a trustworthy healthcare website. Case study by Arada Tech in Addis Ababa, Ethiopia.',
+    coverImage: '/images/portfolio/yeha-dental.png',
   },
   {
     slug: 'getpros-platform',
@@ -201,5 +210,6 @@ export const caseStudies: CaseStudy[] = [
     metaTitle: 'GetPros Platform Case Study | Arada Tech Portfolio',
     metaDescription:
       'GetPros marketplace: web app, mobile apps, and backend shipped in 14 weeks. Ethiopian startup case study by Arada Tech, Addis Ababa.',
+    coverImage: '/images/portfolio/getpros.png',
   },
 ];

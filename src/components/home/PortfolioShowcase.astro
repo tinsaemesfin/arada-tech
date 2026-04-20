@@ -1,5 +1,6 @@
 ---
 import { caseStudies } from '@data/portfolio';
+import PortfolioLaptopMockup from '@components/portfolio/PortfolioLaptopMockup.astro';
 
 const featuredStudies = caseStudies
   .filter((c) => c.featuredRank != null)
@@ -19,14 +20,21 @@ const moreProjectCount = caseStudies.length - featuredStudies.length;
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 stagger-children">
-        {featuredStudies.map((study) => (
+        {featuredStudies.map((study, index) => (
           <a href={`/portfolio/${study.slug}/`} class="group block tilt-card">
-            <div class="relative aspect-[4/3] rounded-2xl overflow-hidden bg-neutral-100 mb-6">
-              {/* Placeholder for project screenshot */}
-              <div class="absolute inset-0 bg-gradient-to-br from-primary-500/80 to-primary-800/90 flex items-center justify-center">
-                <span class="text-white font-display font-bold text-xl text-center px-6">{study.client}</span>
-              </div>
-              <div class="absolute inset-0 bg-neutral-900/0 group-hover:bg-neutral-900/20 transition-colors duration-300"></div>
+            <div class="relative mb-6">
+              {study.coverImage && (
+                <PortfolioLaptopMockup
+                  src={study.coverImage}
+                  alt={`${study.title} — product preview`}
+                  priority={index === 0}
+                  class="w-full group-hover:ring-2 group-hover:ring-primary-500/20 transition-shadow duration-300 rounded-t-[1.25rem]"
+                />
+              )}
+              <div
+                class="pointer-events-none absolute inset-0 z-10 rounded-t-[1.25rem] bg-neutral-900/0 transition-colors duration-300 group-hover:bg-neutral-900/10"
+                aria-hidden="true"
+              />
             </div>
             <div>
               <div class="flex flex-wrap gap-2 mb-3">

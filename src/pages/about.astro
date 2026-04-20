@@ -10,7 +10,7 @@ const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'AboutPage',
   name: 'About Arada Tech',
-  description: 'Learn about Arada Tech, a software development company based in Addis Ababa, Ethiopia, delivering custom digital solutions since 2012.',
+  description: 'Learn about Arada Tech, a software development company based in Addis Ababa, Ethiopia, delivering custom digital solutions since 2016.',
   url: new URL('/about/', Astro.site).href,
   mainEntity: {
     '@type': 'Organization',
@@ -29,18 +29,18 @@ const values = [
 ];
 
 const timeline = [
-  { year: '2012', title: 'Founded in Addis Ababa', description: 'Arada Tech was founded with a mission to bring world-class software development to Ethiopian businesses.' },
-  { year: '2015', title: 'First Major Enterprise Client', description: 'Secured our first large-scale enterprise project, building a complete business management system.' },
-  { year: '2018', title: 'Mobile Development Launch', description: 'Expanded our services to include mobile app development for iOS and Android platforms.' },
-  { year: '2020', title: 'Remote-First Operations', description: 'Adapted to serve clients globally while maintaining our Addis Ababa headquarters.' },
-  { year: '2023', title: '50+ Projects Milestone', description: 'Celebrated delivering over 50 successful projects across multiple industries in Ethiopia.' },
+  { year: '2016', title: 'Founded in Addis Ababa', description: 'Arada Tech was founded with a mission to bring world-class software development to Ethiopian businesses.' },
+  { year: '2019', title: 'First Major Enterprise Client', description: 'Secured our first large-scale enterprise project, building a complete business management system.' },
+  { year: '2021', title: 'Mobile Development Launch', description: 'Expanded our services to include mobile app development for iOS and Android platforms.' },
+  { year: '2023', title: 'Remote-First Operations', description: 'Adapted to serve clients globally while maintaining our Addis Ababa headquarters.' },
+  { year: '2025', title: '30+ Projects Milestone', description: 'Celebrated delivering over 30 successful projects across multiple industries in Ethiopia.' },
   { year: '2026', title: 'AI-Driven Development', description: 'Integrating AI and modern tooling to deliver faster, smarter solutions for our clients.' },
 ];
 ---
 
 <BaseLayout
   title="About Arada Tech | Software Development Company in Addis Ababa"
-  description="About Arada Tech: software development in Addis Ababa since 2012. Custom websites, web apps, mobile apps, and digital products for businesses in Ethiopia and beyond."
+  description="About Arada Tech: software development in Addis Ababa since 2016. Custom websites, web apps, mobile apps, and digital products for businesses in Ethiopia and beyond."
   structuredData={structuredData}
   breadcrumbs={breadcrumbs}
 >
@@ -50,7 +50,7 @@ const timeline = [
   <section class="section-padding pb-0">
     <div class="section-container max-w-4xl mx-auto text-center">
       <span class="text-sm font-semibold text-secondary-400 uppercase tracking-wider mb-3 block reveal-up">About Us</span>
-      <h1 class="heading-xl mb-6 reveal-up">Building Software That Matters Since 2012</h1>
+      <h1 class="heading-xl mb-6 reveal-up">Building Software That Matters Since 2016</h1>
       <p class="text-lg sm:text-xl text-neutral-600 leading-relaxed max-w-3xl mx-auto reveal-up">
         Arada Tech is a software development company in Addis Ababa, Ethiopia, led by {company.ceo}. Since {company.foundedYear}, our developers, designers, and strategists have partnered with businesses to ship reliable, user-centered digital products.
       </p>
@@ -81,11 +81,11 @@ const timeline = [
               <div class="absolute top-0 right-0 w-32 h-32 bg-secondary-400/15 rounded-full -translate-y-1/2 translate-x-1/2"></div>
               <div class="grid grid-cols-2 gap-8">
                 <div class="text-center">
-                  <div class="text-4xl font-display font-bold mb-1" data-count="12+">12+</div>
+                  <div class="text-4xl font-display font-bold mb-1" data-count="10+">10+</div>
                   <div class="text-sm text-white/70">Years in Business</div>
                 </div>
                 <div class="text-center">
-                  <div class="text-4xl font-display font-bold mb-1" data-count="50+">50+</div>
+                  <div class="text-4xl font-display font-bold mb-1" data-count="30+">30+</div>
                   <div class="text-sm text-white/70">Projects Delivered</div>
                 </div>
                 <div class="text-center">

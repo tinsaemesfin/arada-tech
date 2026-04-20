@@ -165,6 +165,19 @@ export function initCountUp() {
 
   gsap.utils.toArray<HTMLElement>('[data-count]').forEach((el) => {
     const target = el.dataset.count || '0';
+    // "24/7" etc. — stripping non-digits would turn this into 247; show literal text instead
+    if (/^\d+\/\d+$/.test(target.trim())) {
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top 85%',
+        once: true,
+        onEnter: () => {
+          el.textContent = target;
+        },
+      });
+      return;
+    }
+
     const isPercentage = target.includes('%');
     const hasPlus = target.includes('+');
     const numericValue = parseFloat(target.replace(/[^0-9.]/g, ''));

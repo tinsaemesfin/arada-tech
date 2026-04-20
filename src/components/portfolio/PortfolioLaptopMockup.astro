@@ -1,0 +1,47 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  /** First paint / LCP */
+  priority?: boolean;
+  class?: string;
+}
+
+const { src, alt, priority = false, class: className = '' } = Astro.props;
+---
+
+<div class:list={['mx-auto w-full max-w-4xl', className]}>
+  <div class="flex flex-col items-center select-none">
+    <!-- Lid + screen -->
+    <div
+      class="w-full rounded-t-[1.25rem] bg-gradient-to-b from-neutral-700 via-neutral-800 to-neutral-800 p-2 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.35)] ring-1 ring-black/20 sm:p-3 sm:rounded-t-[1.5rem]"
+    >
+      <div class="relative mx-auto flex justify-center pb-1">
+        <div class="h-1 w-2 rounded-full bg-neutral-600/90 sm:h-1.5 sm:w-2.5" aria-hidden="true"></div>
+      </div>
+      <div class="overflow-hidden rounded-md bg-neutral-950 ring-1 ring-white/10 sm:rounded-lg">
+        <div class="relative aspect-[16/10] w-full">
+          <img
+            src={src}
+            alt={alt}
+            class="absolute inset-0 h-full w-full object-cover object-top"
+            loading={priority ? 'eager' : 'lazy'}
+            decoding="async"
+            fetchpriority={priority ? 'high' : 'auto'}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 896px"
+          />
+        </div>
+      </div>
+    </div>
+    <!-- Hinge -->
+    <div
+      class="h-2 w-[72%] max-w-md rounded-b-md bg-gradient-to-b from-neutral-800 to-neutral-900 shadow-inner ring-1 ring-black/25"
+      aria-hidden="true"
+    ></div>
+    <!-- Base -->
+    <div
+      class="h-4 w-[98%] max-w-3xl rounded-b-xl bg-gradient-to-b from-neutral-800 to-neutral-950 shadow-[0_12px_24px_-8px_rgba(0,0,0,0.4)] sm:h-5"
+      aria-hidden="true"
+    ></div>
+  </div>
+</div>

@@ -2,6 +2,7 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Breadcrumbs from '@components/global/Breadcrumbs.astro';
 import CTA from '@components/global/CTA.astro';
+import PortfolioLaptopMockup from '@components/portfolio/PortfolioLaptopMockup.astro';
 import { caseStudies } from '@data/portfolio';
 
 const study = caseStudies.find((s) => s.slug === 'yeha-dental-clinic')!;
@@ -35,13 +36,16 @@ const structuredData = {
     </div>
   </article>
 
-  <section class="section-padding">
+  <section class="section-padding pb-2">
     <div class="section-container">
-      <div class="aspect-[16/9] rounded-2xl overflow-hidden bg-neutral-100 reveal-scale">
-        <div class="w-full h-full bg-gradient-to-br from-primary-400/80 to-primary-700/90 flex items-center justify-center">
-          <span class="text-white font-display font-bold text-3xl">{study.client}</span>
-        </div>
-      </div>
+      {study.coverImage && (
+        <PortfolioLaptopMockup
+          src={study.coverImage}
+          alt={`${study.title} — product screenshot`}
+          priority
+          class="reveal-scale"
+        />
+      )}
     </div>
   </section>
 
@@ -65,13 +69,13 @@ const structuredData = {
   <section class="section-gap bg-neutral-50">
     <div class="section-padding">
       <div class="section-container">
-        <h2 class="heading-lg text-center mb-12 reveal-up">Measurable Results</h2>
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 stagger-children">
+        <h2 class="portfolio-measurable-heading text-center mb-8 sm:mb-12 reveal-up">Measurable Results</h2>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 stagger-children">
           {study.results.map((result) => (
-            <div class="card text-center">
-              <div class="text-3xl font-display font-bold text-primary-500 mb-2">{result.value}</div>
-              <div class="font-semibold text-neutral-900 mb-1">{result.metric}</div>
-              <div class="text-sm text-neutral-500">{result.description}</div>
+            <div class="card text-center min-w-0 p-4 sm:p-6 lg:p-8">
+              <div class="portfolio-measurable-value mb-1.5 sm:mb-2">{result.value}</div>
+              <div class="portfolio-measurable-metric mb-1">{result.metric}</div>
+              <div class="text-xs sm:text-sm text-neutral-500">{result.description}</div>
             </div>
           ))}
         </div>

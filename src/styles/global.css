@@ -111,6 +111,22 @@
     @apply text-xl sm:text-2xl font-bold leading-snug;
   }
 
+  /* Portfolio case study — stats grid: scale down on phone/tablet (narrow 2-col cells) */
+  .portfolio-measurable-heading {
+    @apply font-display font-bold leading-tight tracking-tight text-balance;
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl;
+  }
+
+  .portfolio-measurable-value {
+    @apply font-display font-bold text-primary-500 leading-tight;
+    @apply text-lg sm:text-xl md:text-2xl lg:text-3xl;
+  }
+
+  .portfolio-measurable-metric {
+    @apply font-semibold text-neutral-900 leading-snug text-balance;
+    @apply text-xs sm:text-sm md:text-base;
+  }
+
   .prose-content {
     @apply text-base sm:text-lg text-neutral-700 leading-relaxed;
   }
