@@ -2,7 +2,7 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Breadcrumbs from '@components/global/Breadcrumbs.astro';
 import CTA from '@components/global/CTA.astro';
-import PortfolioLaptopMockup from '@components/portfolio/PortfolioLaptopMockup.astro';
+import PortfolioDetailShowcase from '@components/portfolio/PortfolioDetailShowcase.astro';
 import { caseStudies } from '@data/portfolio';
 
 const study = caseStudies.find((s) => s.slug === 'viatech-electromechanical')!;
@@ -39,18 +39,13 @@ const structuredData = {
   <section class="section-padding pb-2">
     <div class="section-container">
       {study.coverImage && (
-        <PortfolioLaptopMockup
-          src={study.coverImage}
-          alt={`${study.title} — product screenshot`}
-          priority
-          class="reveal-scale"
-        />
+        <PortfolioDetailShowcase slug={study.slug} title={study.title} coverImage={study.coverImage} />
       )}
     </div>
   </section>
 
   <!-- Challenge & Solution -->
-  <section class="section-gap">
+  <section class="section-gap" id={`${study.slug}-overview`} data-portfolio-target={study.slug}>
     <div class="section-padding">
       <div class="section-container max-w-4xl">
         <div class="grid md:grid-cols-2 gap-12">
@@ -122,5 +117,7 @@ const structuredData = {
 
 <script>
   import { initScrollAnimations } from '@scripts/scroll-animations';
+  import { initPortfolioIntro } from '@scripts/portfolio/portfolio-intro';
   initScrollAnimations();
+  initPortfolioIntro();
 </script>

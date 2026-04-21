@@ -1,4 +1,5 @@
 import { gsap } from 'gsap';
+
 function nextFrame() {
   return new Promise<void>((resolve) => {
     requestAnimationFrame(() => resolve());
@@ -24,17 +25,18 @@ async function waitForImage(image: HTMLImageElement | null) {
   });
 }
 
-export async function initAradaClearIntro() {
-  const root = document.querySelector<HTMLElement>('[data-portfolio-intro="arada-clear"]');
+export async function initPortfolioIntro() {
+  const root = document.querySelector<HTMLElement>('[data-portfolio-intro]');
+  const slug = root?.dataset.portfolioIntro;
   const stage = root?.querySelector<HTMLElement>('[data-portfolio-stage]');
   const label = root?.querySelector<HTMLElement>('[data-portfolio-label]');
   const cue = root?.querySelector<HTMLElement>('[data-portfolio-scroll-cue]');
   const beam = root?.querySelector<HTMLElement>('[data-portfolio-beam]');
   const grid = root?.querySelector<HTMLElement>('[data-portfolio-grid]');
-  const target = document.querySelector<HTMLElement>('[data-portfolio-target="arada-clear"]');
+  const target = slug ? document.querySelector<HTMLElement>(`[data-portfolio-target="${slug}"]`) : null;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  if (!root || !stage || !label || !cue || !beam || !grid || !target) return;
+  if (!root || !slug || !stage || !label || !cue || !beam || !grid || !target) return;
   if (root.dataset.introInitialized === 'true') return;
   if (reducedMotion) return;
   if (window.scrollY > 32 || window.location.hash) return;
