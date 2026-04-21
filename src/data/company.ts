@@ -29,7 +29,7 @@ export const company = {
     facebook: '',
     instagram: '',
   },
-  hours: 'Mo-Fr 09:00-19:00, Sa 10:00-14:00',
+  hours: 'Mo to Fr 09:00 to 19:00, Sa 10:00 to 14:00',
 } as const;
 
 /** Paths under `public/` — full logo (mark + wordmark), icon-only mark (favicons, compact UI). */
