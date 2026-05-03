@@ -114,7 +114,7 @@ const shareUrlEncoded = encodeURIComponent(shareUrl);
   breadcrumbs={breadcrumbs}
 >
   <!-- Reading Progress Bar -->
-  <div id="reading-progress" class="fixed top-0 left-0 h-[3px] bg-gradient-to-r from-primary-500 via-secondary-400 to-primary-500 z-50 transition-none" style="width: 0%"></div>
+  <div id="reading-progress" class="reading-progress-indicator fixed top-0 left-0 h-[3px] bg-gradient-to-r from-primary-500 via-secondary-400 to-primary-500 z-50 transition-none max-w-full"></div>
 
   <Breadcrumbs items={breadcrumbs} />
 
@@ -359,7 +359,7 @@ const shareUrlEncoded = encodeURIComponent(shareUrl);
         const articleHeight = rect.height;
         const scrolled = window.scrollY - articleTop;
         const progress = Math.max(0, Math.min(100, (scrolled / (articleHeight - window.innerHeight)) * 100));
-        progressBar.style.width = `${progress}%`;
+        progressBar.style.setProperty('--reading-progress-pct', `${progress}%`);
       };
       window.addEventListener('scroll', updateProgress, { passive: true });
       updateProgress();
@@ -403,7 +403,7 @@ const shareUrlEncoded = encodeURIComponent(shareUrl);
       headings.forEach((heading) => observer.observe(heading));
     } else if (tocList) {
       const toc = document.getElementById('toc');
-      if (toc) toc.style.display = 'none';
+      if (toc) toc.classList.add('hidden');
     }
 
     // Back to top button

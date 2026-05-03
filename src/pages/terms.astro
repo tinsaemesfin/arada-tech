@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Breadcrumbs from '@components/global/Breadcrumbs.astro';
+import EmailContact from '@components/global/EmailContact.astro';
 import { company } from '@data/company';
 
 const breadcrumbs = [{ name: 'Terms of Service', href: '/terms/' }];
@@ -67,7 +68,10 @@ const breadcrumbs = [{ name: 'Terms of Service', href: '/terms/' }];
       <h2>Contact Us</h2>
       <p>If you have questions about these Terms, please contact us:</p>
       <ul>
-        <li>Email: <a href={`mailto:${company.email}`}>{company.email}</a></li>
+        <li>
+          Email (write as shown — use our <a href="/contact/">contact form</a> for the fastest reply):
+          <EmailContact variant="prose" class="block mt-1 font-medium text-neutral-800" />
+        </li>
         <li>Phone: <a href={`tel:${company.phoneRaw}`}>{company.phone}</a></li>
         <li>Address: {company.address.street}, {company.address.city}, {company.address.country}</li>
       </ul>

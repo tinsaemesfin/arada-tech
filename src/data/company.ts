@@ -21,13 +21,17 @@ export const company = {
     longitude: 38.7636,
   },
   url: 'https://www.aradatech.com',
-  // TODO: add social media URLs when profiles are created
+  /**
+   * Official profile URLs (https://…). Icons and Organization `sameAs` schema use these.
+   * Paste your live links here when ready — leave '' until then.
+   */
   social: {
-    linkedin: '',
-    twitter: '',
-    github: '',
+    linkedin: 'https://www.linkedin.com/company/arada-tech/',
+    twitter: 'https://x.com/tinsaemesfin',
     facebook: '',
     instagram: '',
+    youtube: 'www.youtube.com/@aradatech7072',
+    github: 'https://github.com/tinsaemesfin',
   },
   hours: 'Mo to Fr 09:00 to 19:00, Sa 10:00 to 14:00',
 } as const;
@@ -40,6 +44,8 @@ export const brandAssets = {
 
 export const siteConfig = {
   title: 'Arada Tech',
+  /** Shorter homepage `<title>` for SEO tools that flag long titles */
+  homePageTitle: 'Arada Tech | Software & Web Apps, Addis Ababa',
   titleTemplate: '%s | Arada Tech',
   defaultDescription: company.description,
   defaultOgImage: '/images/og-default.jpg',

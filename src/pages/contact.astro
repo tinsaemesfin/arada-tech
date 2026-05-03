@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Breadcrumbs from '@components/global/Breadcrumbs.astro';
+import EmailContact from '@components/global/EmailContact.astro';
 import { company } from '@data/company';
 
 const breadcrumbs = [{ name: 'Contact', href: '/contact/' }];
@@ -16,7 +17,6 @@ const structuredData = {
     '@id': `${company.url}/#organization`,
     name: company.name,
     url: company.url,
-    email: company.email,
     telephone: company.phone,
     address: {
       '@type': 'PostalAddress',
@@ -29,7 +29,7 @@ const structuredData = {
 ---
 
 <BaseLayout
-  title="Contact Us | Get a Free Consultation"
+  title="Contact Us | Arada Tech Consultation"
   description="Contact Arada Tech in Addis Ababa: free consultation for websites, web apps, mobile apps, custom software, and UI/UX. We reply within one business day."
   structuredData={structuredData}
   breadcrumbs={breadcrumbs}
@@ -70,7 +70,11 @@ const structuredData = {
                 </div>
                 <div>
                   <div class="font-semibold text-neutral-900 mb-1">Email</div>
-                  <a href={`mailto:${company.email}`} class="text-neutral-600 hover:text-primary-500 transition-colors">{company.email}</a>
+                  <p class="text-sm text-neutral-600 leading-relaxed">
+                    Fastest reply: use this page’s <a href="#contact-form" class="font-medium text-primary-500 hover:underline">secure form</a>.
+                    Written address (not a clickable email):
+                    <EmailContact variant="prose" class="block mt-1 font-medium text-neutral-800" />
+                  </p>
                 </div>
               </div>
 

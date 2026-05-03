@@ -35,7 +35,7 @@ export const caseStudies: CaseStudy[] = [
       { metric: 'Integration', value: 'Service ready', description: 'Built to connect with settlement and back office systems' },
     ],
     technologies: ['React', 'Node.js', 'PostgreSQL', 'Redis', 'REST APIs', 'Docker'],
-    metaTitle: 'Arada Clear, Invoice Clearing Platform | Arada Tech Portfolio',
+    metaTitle: 'Arada Clear Invoice Platform | Arada Tech',
     metaDescription:
       'Arada Clear: a clearinghouse platform for bulk invoice upload, validation, and algorithm driven clearing built by Arada Tech.',
     coverImage: '/images/portfolio/Arada-clear.png',
@@ -58,7 +58,7 @@ export const caseStudies: CaseStudy[] = [
       { metric: 'Single system', value: 'One source', description: 'HR data connected across modules' },
     ],
     technologies: ['React', 'Node.js', 'PostgreSQL', 'REST APIs', 'Role based access control'],
-    metaTitle: 'Human Resource Management System (HRMS) | Arada Tech Portfolio',
+    metaTitle: 'HRMS Platform Case Study | Arada Tech',
     metaDescription:
       'End to end HRMS with customizable payroll, attendance, performance management, and employee lifecycle tools by Arada Tech.',
     coverImage: '/images/portfolio/HRMS.png',
@@ -81,7 +81,7 @@ export const caseStudies: CaseStudy[] = [
       { metric: 'Fit for sector', value: 'Real estate', description: 'Workflows aligned to handover and warranty' },
     ],
     technologies: ['React', 'Node.js', 'PostgreSQL', 'REST APIs', 'Notification workflows'],
-    metaTitle: 'Real Estate After Sales Management System | Arada Tech Portfolio',
+    metaTitle: 'Real Estate After Sales | Arada Tech',
     metaDescription:
       'After sales platform for real estate: complaint handling, collections, and operational control beyond the sales website.',
     coverImage: '/images/portfolio/realstate-manegemnt.png',
@@ -104,7 +104,7 @@ export const caseStudies: CaseStudy[] = [
       { metric: 'Ownership', value: 'End to end', description: 'Designed for operational monitoring' },
     ],
     technologies: ['Node.js', 'PostgreSQL', 'REST APIs', 'Message queues', 'ETL patterns'],
-    metaTitle: 'Local Loop Mercy, Invoice Cleaning Service | Arada Tech Portfolio',
+    metaTitle: 'Local Loop Mercy | Arada Tech',
     metaDescription:
       'Local Loop Mercy: invoice collection, cleaning, and handoff to a clearing service, engineered with Arada Tech.',
     coverImage: '/images/portfolio/local-loop.png',
@@ -126,7 +126,7 @@ export const caseStudies: CaseStudy[] = [
       { metric: 'Operations', value: 'One system', description: 'Less duplicate entry across departments' },
     ],
     technologies: ['React', 'Node.js', 'PostgreSQL', 'HL7/FHIR ready interfaces', 'REST APIs'],
-    metaTitle: 'Clinic & Hospital Management System | Arada Tech Portfolio',
+    metaTitle: 'Clinic & Hospital Platform | Arada Tech',
     metaDescription:
       'Hospital and clinic management with patient workflows, laboratory integration, and medical data management by Arada Tech.',
     coverImage: '/images/portfolio/clinic-manegemnt.png',
@@ -153,7 +153,7 @@ export const caseStudies: CaseStudy[] = [
       author: 'Daniel Bekele',
       role: 'Managing Director, Viatech Electro Mechanical',
     },
-    metaTitle: 'Viatech Electro Mechanical Case Study | Arada Tech Portfolio',
+    metaTitle: 'Viatech Electro Mechanical | Arada Tech',
     metaDescription:
       'Viatech Electro Mechanical website: faster performance, stronger B2B inquiries, modern UX. Engineering firm case study by Arada Tech, Addis Ababa.',
     coverImage: '/images/portfolio/viatech.png',
@@ -180,7 +180,7 @@ export const caseStudies: CaseStudy[] = [
       author: 'Dr. Yohannes Tadesse',
       role: 'Founder, Yeha Dental Clinic',
     },
-    metaTitle: 'Yeha Dental Clinic Case Study | Arada Tech Portfolio',
+    metaTitle: 'Yeha Dental Clinic Website | Arada Tech',
     metaDescription:
       'Yeha Dental Clinic: local SEO, online appointments, and a trustworthy healthcare website. Case study by Arada Tech in Addis Ababa, Ethiopia.',
     coverImage: '/images/portfolio/yeha-dental.png',
@@ -207,7 +207,7 @@ export const caseStudies: CaseStudy[] = [
       author: 'Meron Alemu',
       role: 'CEO, GetPros',
     },
-    metaTitle: 'GetPros Platform Case Study | Arada Tech Portfolio',
+    metaTitle: 'GetPros Marketplace | Arada Tech',
     metaDescription:
       'GetPros marketplace: web app, mobile apps, and backend shipped in 14 weeks. Ethiopian startup case study by Arada Tech, Addis Ababa.',
     coverImage: '/images/portfolio/getpros.png',

@@ -2,6 +2,7 @@ import Lenis from 'lenis';
 
 export function initSmoothScroll() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.matchMedia('(pointer: coarse)').matches) return;
 
   const lenis = new Lenis({
     duration: 1.2,

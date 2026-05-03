@@ -1,0 +1,39 @@
+---
+import { formatEmailObfuscated } from '@/utils/obfuscated-email';
+import { company } from '@data/company';
+
+interface Props {
+  class?: string;
+  /** Structured row with icon (footer). */
+  variant?: 'row' | 'inline' | 'prose';
+}
+
+const { class: className = '', variant = 'row' } = Astro.props;
+const obfuscated = formatEmailObfuscated(company.email);
+---
+
+{variant === 'prose' ? (
+  <span class={className} translate="no">{obfuscated}</span>
+) : variant === 'inline' ? (
+  <a href="/contact/" class={className}>
+    Email via contact page<span class="sr-only"> (written address: {obfuscated})</span>
+  </a>
+) : (
+  <a
+    href="/contact/"
+    class:list={[
+      'flex flex-col gap-1 text-sm text-neutral-300 hover:text-secondary-400 transition-colors group items-start max-w-[16rem]',
+      className,
+    ]}
+    aria-label="Email Arada Tech using the contact form"
+  >
+    <span class="flex items-start gap-3">
+      <svg class="w-4 h-4 mt-0.5 text-secondary-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+      </svg>
+      <span class="font-medium text-neutral-100 leading-snug">Email</span>
+    </span>
+    <span class="pl-[1.85rem] text-xs text-neutral-400 leading-snug" translate="no">{obfuscated}</span>
+    <span class="pl-[1.85rem] text-xs text-secondary-400/90">Open secure contact form</span>
+  </a>
+)}

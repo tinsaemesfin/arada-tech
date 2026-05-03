@@ -210,7 +210,7 @@ export function initHeroAnimations() {
   const isMobileHero = window.matchMedia('(max-width: 1023px)').matches;
 
   if (reduced) {
-    gsap.set('.hero-badge, .hero-description, .hero-ctas, .hero-trust', { opacity: 1 });
+    gsap.set('.hero-badge, .hero-description, .mobile-hero-copy, .hero-ctas, .hero-trust', { opacity: 1 });
     gsap.set('.hero-title-line', { clipPath: 'inset(0 0% 0 0)' });
     gsap.set('.hero-devices-lg .hero-device', { opacity: 1 });
     document.querySelectorAll('.hero-devices-lg .hero-device').forEach(el =>
@@ -221,8 +221,63 @@ export function initHeroAnimations() {
 
   const heroContent = document.querySelector('.hero-content');
 
-  /* Mobile / tablet: static hero — no GSAP entrance, no scroll-parallax fade */
   if (isMobileHero) {
+    const mobileTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+    mobileTl
+      .fromTo('.hero-badge',
+        { opacity: 0, y: 18, scale: 0.96 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.55 },
+        0.1,
+      )
+      .fromTo('.hero-title-line',
+        { clipPath: 'inset(0 100% 0 0)', y: 22, filter: 'blur(8px)' },
+        { clipPath: 'inset(0 0% 0 0)', y: 0, filter: 'blur(0px)', duration: 0.9, stagger: 0.16, ease: 'power4.out' },
+        0.25,
+      )
+      .fromTo('.mobile-hero-copy',
+        { opacity: 0, y: 24 },
+        { opacity: 1, y: 0, duration: 0.68 },
+        0.72,
+      )
+      .fromTo('.hero-ctas > a',
+        { opacity: 0, y: 24, scale: 0.96 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.58, stagger: 0.1, ease: 'back.out(1.35)' },
+        0.86,
+      )
+      .fromTo('.hero-trust > div',
+        { opacity: 0, y: 14 },
+        { opacity: 1, y: 0, duration: 0.48, stagger: 0.08 },
+        1.08,
+      );
+
+    if (heroContent) {
+      gsap.to(heroContent, {
+        y: -42,
+        scale: 0.975,
+        opacity: 0.72,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 0.9,
+        },
+      });
+
+      gsap.to('.hero-title-line', {
+        yPercent: -14,
+        ease: 'none',
+        stagger: 0.08,
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 0.8,
+        },
+      });
+    }
+
     return;
   }
 
@@ -278,6 +333,124 @@ export function initHeroAnimations() {
         end: 'bottom top',
         scrub: 1.5,
       },
+    });
+  }
+}
+
+export function initMobileExperienceAnimations() {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isMobile = window.matchMedia('(max-width: 767px)').matches;
+
+  if (reduced || !isMobile) {
+    return;
+  }
+
+  const mobileExperience = document.querySelector('#mobile-experience');
+
+  if (!mobileExperience) {
+    return;
+  }
+
+  gsap.utils.toArray<HTMLElement>('#mobile-experience .mobile-reveal').forEach((el) => {
+    gsap.fromTo(
+      el,
+      { y: 34, opacity: 0, scale: 0.97 },
+      {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 0.75,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 88%',
+          once: true,
+        },
+      }
+    );
+  });
+
+  gsap.utils.toArray<HTMLElement>('#mobile-experience .mobile-service-card').forEach((card, index) => {
+    gsap.to(card, {
+      y: index % 2 === 0 ? -10 : 10,
+      rotate: index % 2 === 0 ? -1.2 : 1.2,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: card,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 0.8,
+      },
+    });
+  });
+
+  gsap.utils.toArray<HTMLElement>('#mobile-experience .mobile-proof-card').forEach((card, index) => {
+    gsap.fromTo(
+      card,
+      { y: 70, rotateX: 10, scale: 0.94 },
+      {
+        y: 0,
+        rotateX: 0,
+        scale: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 92%',
+          end: 'top 46%',
+          scrub: 0.7,
+        },
+      }
+    );
+
+    gsap.to(card, {
+      yPercent: -4 * index,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: card,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 0.9,
+      },
+    });
+  });
+
+  const timeline = document.querySelector('#mobile-experience .mobile-timeline');
+  const timelineFill = document.querySelector('#mobile-experience .mobile-timeline-fill');
+  if (timeline && timelineFill) {
+    gsap.fromTo(
+      timelineFill,
+      { scaleY: 0 },
+      {
+        scaleY: 1,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: timeline,
+          start: 'top 82%',
+          end: 'bottom 58%',
+          scrub: 0.8,
+        },
+      }
+    );
+  }
+
+  const launchStep = document.querySelector<HTMLElement>('#mobile-experience .mobile-launch-step');
+  if (launchStep) {
+    ScrollTrigger.create({
+      trigger: launchStep,
+      start: 'top 72%',
+      once: true,
+      onEnter: () => launchStep.classList.add('is-launched'),
+    });
+  }
+
+  const stickyCta = document.querySelector('#mobile-sticky-cta');
+  const footer = document.querySelector('footer');
+  if (stickyCta && footer) {
+    ScrollTrigger.create({
+      trigger: footer,
+      start: 'top bottom',
+      onEnter: () => gsap.to(stickyCta, { y: 110, opacity: 0, duration: 0.25, ease: 'power2.out' }),
+      onLeaveBack: () => gsap.to(stickyCta, { y: 0, opacity: 1, duration: 0.25, ease: 'power2.out' }),
     });
   }
 }

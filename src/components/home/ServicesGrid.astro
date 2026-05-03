@@ -22,11 +22,10 @@ const iconPaths: Record<string, string> = {
 
       <!-- Services Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-children">
-        {services.map((service, index) => (
+        {services.map((service) => (
           <a
             href={service.href}
             class="card-hover tilt-card group relative overflow-hidden"
-            style={`--delay: ${index * 0.1}s`}
           >
             {/* Accent bar */}
             <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-500 to-secondary-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>

@@ -13,7 +13,8 @@ const posts = (await getCollection('blog')).sort(
 const featuredPost = posts[0];
 const remainingPosts = posts.slice(1);
 
-const categories = ['All', ...new Set(posts.map((p) => p.data.category))];
+const categories =
+  posts.length > 0 ? ['All', ...new Set(posts.map((p) => p.data.category))] : ['All'];
 
 const categoryColors: Record<string, { bg: string; text: string; dot: string }> = {
   Technology: { bg: 'bg-blue-50', text: 'text-blue-600', dot: 'bg-blue-500' },
@@ -31,14 +32,24 @@ const structuredData = {
   url: new URL('/blog/', Astro.site).href,
 };
 
-const featuredDate = new Date(featuredPost.data.publishDate).toLocaleDateString('en-US', {
-  year: 'numeric', month: 'long', day: 'numeric',
-});
-const featuredCat = categoryColors[featuredPost.data.category] || { bg: 'bg-primary-50', text: 'text-primary-600', dot: 'bg-primary-500' };
+const featuredDate = featuredPost
+  ? new Date(featuredPost.data.publishDate).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    })
+  : '';
+const featuredCat = featuredPost
+  ? categoryColors[featuredPost.data.category] || {
+      bg: 'bg-primary-50',
+      text: 'text-primary-600',
+      dot: 'bg-primary-500',
+    }
+  : { bg: 'bg-primary-50', text: 'text-primary-600', dot: 'bg-primary-500' };
 ---
 
 <BaseLayout
-  title="Blog | Software Development Insights for Ethiopian Businesses"
+  title="Blog | Software Insights, Ethiopia"
   description="Software development articles for Ethiopian businesses: web, mobile, UI/UX, and digital strategy. Insights from Arada Tech in Addis Ababa."
   structuredData={structuredData}
   breadcrumbs={breadcrumbs}

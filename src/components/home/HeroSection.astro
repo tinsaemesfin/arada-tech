@@ -29,8 +29,8 @@ const barHeights = [40, 65, 45, 80, 55, 70, 90, 60, 75, 85, 50, 95];
             </span>
           </h1>
 
-          <p class="lg:hidden text-base text-neutral-900 leading-relaxed mb-8 max-w-xl">
-            Custom websites, web apps, and mobile software for businesses in Ethiopia. Based in {company.address.city} since {company.foundedYear}.
+          <p class="mobile-hero-copy lg:hidden text-base text-neutral-900 leading-relaxed mb-8 max-w-xl">
+            Custom software, mobile apps, and business platforms for companies ready to modernize how they operate, sell, and serve customers.
           </p>
           <p class="hero-description hidden lg:block text-lg sm:text-xl text-neutral-900 leading-relaxed mb-10 max-w-xl opacity-100 lg:opacity-0">
             {company.name} is a software development company headquartered in {company.address.city}, {company.address.country}, founded in {company.foundedYear}. We design, build, and deploy custom websites, web apps, mobile apps, and software for businesses in Ethiopia and beyond.
@@ -65,6 +65,7 @@ const barHeights = [40, 65, 45, 80, 55, 70, 90, 60, 75, 85, 50, 95];
               <span>Based in Addis Ababa</span>
             </div>
           </div>
+
         </div>
 
         <!-- Floating device mockups (desktop) -->
@@ -72,7 +73,7 @@ const barHeights = [40, 65, 45, 80, 55, 70, 90, 60, 75, 85, 50, 95];
           <div class="hero-devices relative [perspective:1200px]">
 
             <!-- Browser / Dashboard -->
-            <div class="hero-device hero-browser opacity-0" style="transform: rotateY(-8deg) rotateX(5deg)">
+            <div class="hero-device hero-browser hero-browser-pose opacity-0">
               <div class="rounded-xl overflow-hidden border border-neutral-200/80 bg-white shadow-2xl shadow-neutral-900/[0.08]">
                 <div class="flex items-center gap-2 px-4 py-3 border-b border-neutral-100 bg-neutral-50/80">
                   <div class="flex gap-1.5">
@@ -102,11 +103,11 @@ const barHeights = [40, 65, 45, 80, 55, 70, 90, 60, 75, 85, 50, 95];
                     </div>
                   </div>
                   <div class="h-28 rounded-lg bg-neutral-50/80 border border-neutral-100 p-3">
-                    <div class="flex items-end gap-[3px] h-full">
-                      {barHeights.map((h, i) => (
+                    <div class="hero-dash-bars flex items-end gap-[3px] h-full">
+                      {barHeights.map((h) => (
                         <div
-                          class="dash-bar flex-1 rounded-sm bg-gradient-to-t from-primary-500/50 to-primary-300/30"
-                          style={`height: ${h}%; --bar-delay: ${i * 0.08}s`}
+                          class={`dash-bar flex-1 rounded-sm bg-gradient-to-t from-primary-500/50 to-primary-300/30`}
+                          data-bar-height={h}
                         ></div>
                       ))}
                     </div>
@@ -130,7 +131,7 @@ const barHeights = [40, 65, 45, 80, 55, 70, 90, 60, 75, 85, 50, 95];
             </div>
 
             <!-- Phone -->
-            <div class="hero-device hero-phone absolute -bottom-6 -left-6 z-10 opacity-0" style="transform: rotateY(5deg) rotateX(-3deg)">
+            <div class="hero-device hero-phone hero-phone-pose absolute -bottom-6 -left-6 z-10 opacity-0">
               <div class="w-[140px] rounded-[20px] overflow-hidden border border-neutral-200/80 bg-white shadow-2xl shadow-neutral-900/[0.08]">
                 <div class="flex justify-center py-2.5 bg-neutral-50/50">
                   <div class="w-14 h-[5px] rounded-full bg-neutral-200"></div>
@@ -175,7 +176,7 @@ const barHeights = [40, 65, 45, 80, 55, 70, 90, 60, 75, 85, 50, 95];
             </div>
 
             <!-- Code Window (dark theme for contrast) -->
-            <div class="hero-device hero-code absolute -top-6 -right-2 opacity-0" style="transform: rotateY(-12deg) rotateX(8deg)">
+            <div class="hero-device hero-code hero-code-pose absolute -top-6 -right-2 opacity-0">
               <div class="w-[210px] rounded-xl overflow-hidden border border-neutral-700/20 bg-[#1e1e2e] shadow-2xl shadow-neutral-900/15">
                 <div class="flex items-center gap-2 px-3 py-2 border-b border-white/[0.06] bg-[#181825]">
                   <div class="flex gap-1">

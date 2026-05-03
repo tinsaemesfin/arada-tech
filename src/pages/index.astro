@@ -8,7 +8,7 @@ import PortfolioShowcase from '@components/home/PortfolioShowcase.astro';
 import TestimonialsSection from '@components/home/TestimonialsSection.astro';
 import BlogPreview from '@components/home/BlogPreview.astro';
 import CTA from '@components/global/CTA.astro';
-import MobileQuickNav from '@components/home/MobileQuickNav.astro';
+import MobileExperience from '@components/home/MobileExperience.astro';
 import { brandAssets, company } from '@data/company';
 import { services } from '@data/services';
 
@@ -166,8 +166,8 @@ const structuredData = [
 >
   <HeroSection />
 
-  {/* Mobile: compact quick-nav replaces heavy sections */}
-  <MobileQuickNav />
+  {/* Mobile: app-like sales journey replaces heavy desktop sections */}
+  <MobileExperience />
 
   {/* Desktop: full sections (hidden on mobile) */}
   <div class="hidden md:block">
@@ -179,17 +179,59 @@ const structuredData = [
     <BlogPreview />
   </div>
 
+  <section class="hidden md:block section-padding section-gap bg-neutral-50 border-t border-neutral-200/80" aria-labelledby="homepage-about-heading">
+    <div class="section-container max-w-4xl">
+      <h2 id="homepage-about-heading" class="heading-md text-neutral-900 mb-6">
+        Software development partner for Ethiopian businesses and international teams
+      </h2>
+      <div class="prose-content space-y-4 text-neutral-700">
+        <p>
+          Arada Tech is a product-minded engineering studio in {company.address.city}. We replace manual workflows, spreadsheets, and legacy tools with websites,{' '}
+          <a href="/services/web-application-development/" class="text-primary-600 font-medium hover:underline">web applications</a>,{' '}
+          <a href="/services/mobile-app-development/" class="text-primary-600 font-medium hover:underline">mobile apps</a>, and{' '}
+          <a href="/services/custom-software-development/" class="text-primary-600 font-medium hover:underline">custom software</a> that your team can run every day.
+        </p>
+        <p>
+          Our projects span healthcare, finance, real estate operations, clearing and document services, and professional services firms. Discovery starts with mapping users, approvals, integrations,{' '}
+          and reporting expectations, then design and delivery follow with staging environments, QA, documentation, and post-launch support so operations stay predictable.
+        </p>
+        <p>
+          If you are headquartered in Ethiopia or collaborating with teams abroad, we can structure milestones, integrations,{' '}
+          and hosting to match procurement, compliance, and performance needs. Start with a{' '}
+          <a href="/contact/" class="text-primary-600 font-medium hover:underline">free consultation</a>{' '}
+          or browse the <a href="/portfolio/" class="text-primary-600 font-medium hover:underline">portfolio</a>{' '} for similar systems.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <CTA variant="gradient" />
 </BaseLayout>
 
 <script>
-  import { initScrollAnimations, initCountUp, initHeroAnimations, initMagneticButtons, initTiltCards } from '@scripts/scroll-animations';
-  import { initSmoothScroll } from '@scripts/smooth-scroll';
+  function scheduleHomeBoot() {
+    const run = () => {
+      (async () => {
+        const [{ initSmoothScroll }, anim] = await Promise.all([
+          import('@scripts/smooth-scroll'),
+          import('@scripts/scroll-animations'),
+        ]);
+        initSmoothScroll();
+        anim.initHeroAnimations();
+        anim.initScrollAnimations();
+        anim.initCountUp();
+        anim.initMagneticButtons();
+        anim.initTiltCards();
+        anim.initMobileExperienceAnimations();
+      })().catch(() => {});
+    };
 
-  initSmoothScroll();
-  initHeroAnimations();
-  initScrollAnimations();
-  initCountUp();
-  initMagneticButtons();
-  initTiltCards();
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(run, { timeout: 2000 });
+    } else {
+      window.setTimeout(run, 180);
+    }
+  }
+
+  scheduleHomeBoot();
 </script>
