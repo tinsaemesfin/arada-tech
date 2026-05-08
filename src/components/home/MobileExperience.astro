@@ -95,7 +95,7 @@ const launchParticles = [
 ];
 ---
 
-<div id="mobile-experience" class="md:hidden mobile-app-experience relative overflow-hidden bg-[#071124] text-white">
+<div id="mobile-experience" class="md:hidden mobile-app-experience relative overflow-hidden bg-neutral-50 text-neutral-900">
   <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
     <div class="mobile-orb mobile-orb-primary"></div>
     <div class="mobile-orb mobile-orb-secondary"></div>
@@ -103,12 +103,12 @@ const launchParticles = [
 
   <section class="relative px-4 pt-6 pb-8">
     <div class="mx-auto max-w-lg">
-      <div class="mobile-reveal rounded-[2rem] border border-white/10 bg-white/[0.06] p-4 shadow-2xl shadow-black/20 backdrop-blur-xl">
+      <div class="mobile-reveal rounded-[2rem] border border-neutral-200/90 bg-white/95 p-4 shadow-xl shadow-neutral-900/[0.06] backdrop-blur-xl">
         <div class="grid grid-cols-3 gap-2">
           {stats.map((stat) => (
-            <div class="rounded-2xl bg-white/[0.08] px-3 py-4 text-center ring-1 ring-white/10">
-              <div class="font-display text-2xl font-bold text-white">{stat.value}</div>
-              <div class="mt-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/50">{stat.label}</div>
+            <div class="rounded-2xl bg-neutral-50 px-3 py-4 text-center ring-1 ring-neutral-200/90">
+              <div class="font-display text-2xl font-bold text-neutral-900">{stat.value}</div>
+              <div class="mt-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-neutral-600">{stat.label}</div>
             </div>
           ))}
         </div>
@@ -119,11 +119,11 @@ const launchParticles = [
   <section class="relative px-4 py-10">
     <div class="mx-auto max-w-lg">
       <div class="mobile-reveal mb-7">
-        <p class="mb-3 text-xs font-bold uppercase tracking-[0.28em] text-secondary-300">Choose your system</p>
-        <h2 class="font-display text-3xl font-bold leading-tight text-white">
+        <p class="mb-3 text-xs font-bold uppercase tracking-[0.28em] text-secondary-700">Choose your system</p>
+        <h2 class="font-display text-3xl font-bold leading-tight text-neutral-900">
           Build the software layer your business has been missing.
         </h2>
-        <p class="mt-4 text-sm leading-6 text-white/68">
+        <p class="mt-4 text-sm leading-6 text-neutral-700">
           We focus on custom software, mobile apps, dashboards, and integrated platforms that solve operational problems, not just pages that look good.
         </p>
       </div>
@@ -133,30 +133,39 @@ const launchParticles = [
           <a
             href={service.href}
             class:list={[
-              'mobile-service-card mobile-reveal group relative min-h-[154px] overflow-hidden rounded-[1.6rem] border border-white/10 bg-white/[0.07] p-4 shadow-xl shadow-black/10 backdrop-blur-xl active:scale-[0.98]',
-              index === 0 ? 'col-span-2 min-h-[132px] bg-gradient-to-br from-secondary-400 to-secondary-500 text-white' : '',
+              'mobile-service-card mobile-reveal group relative min-h-[154px] overflow-hidden rounded-[1.6rem] border border-neutral-200/90 bg-white/95 p-4 shadow-lg shadow-neutral-900/[0.05] backdrop-blur-xl active:scale-[0.98]',
+              index === 0 ? 'col-span-2 min-h-[132px] bg-gradient-to-br from-secondary-400 to-secondary-500 text-white border-transparent shadow-secondary-500/15' : '',
             ]}
           >
-            <div class="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-white/10 blur-2xl"></div>
+            <div class:list={[
+              'absolute -right-8 -top-8 h-24 w-24 rounded-full blur-2xl',
+              index === 0 ? 'bg-white/10' : 'bg-primary-100/80',
+            ]}></div>
             <div class="relative flex h-full flex-col justify-between">
               <div class="flex items-start justify-between gap-3">
                 <div class:list={[
                   'flex h-11 w-11 items-center justify-center rounded-2xl ring-1',
-                  index === 0 ? 'bg-white/18 text-white ring-white/20' : 'bg-white/10 text-secondary-300 ring-white/10',
+                  index === 0 ? 'bg-white/18 text-white ring-white/20' : 'bg-primary-50 text-primary-600 ring-primary-100',
                 ]}>
                   <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={iconPaths[service.icon]} />
                   </svg>
                 </div>
-                <span class="rounded-full bg-white/10 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-white/65">
+                <span class:list={[
+                  'rounded-full px-2 py-1 text-[10px] font-bold uppercase tracking-wider',
+                  index === 0 ? 'bg-white/14 text-white/90' : 'bg-neutral-100 text-neutral-700',
+                ]}>
                   {String(index + 1).padStart(2, '0')}
                 </span>
               </div>
               <div>
-                <h3 class="text-base font-bold leading-tight text-white">{serviceCopy[service.slug]?.title ?? service.shortTitle}</h3>
+                <h3 class:list={[
+                  'text-base font-bold leading-tight',
+                  index === 0 ? 'text-white' : 'text-neutral-900',
+                ]}>{serviceCopy[service.slug]?.title ?? service.shortTitle}</h3>
                 <p class:list={[
                   'mt-2 text-xs leading-5',
-                  index === 0 ? 'text-white/82' : 'text-white/62',
+                  index === 0 ? 'text-white/82' : 'text-neutral-600',
                 ]}>
                   {serviceCopy[service.slug]?.tagline ?? service.tagline}
                 </p>
@@ -166,7 +175,7 @@ const launchParticles = [
         ))}
       </div>
 
-      <a href="/contact/" class="mobile-reveal mt-4 block rounded-[1.6rem] border border-primary-300/30 bg-primary-400/18 p-4 backdrop-blur-xl active:scale-[0.99]">
+      <a href="/contact/" class="mobile-reveal mt-4 block rounded-[1.6rem] border border-primary-200/90 bg-primary-50/90 p-4 backdrop-blur-xl shadow-md shadow-primary-900/[0.04] active:scale-[0.99]">
         <div class="flex items-center gap-4">
           <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-secondary-400 text-white shadow-lg shadow-secondary-500/25">
             <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -174,10 +183,10 @@ const launchParticles = [
             </svg>
           </div>
           <div class="min-w-0 flex-1">
-            <h3 class="font-bold text-white">Need a serious system but not sure where to start?</h3>
-            <p class="mt-1 text-xs leading-5 text-white/62">Tell us the workflow. We will recommend the right product architecture and launch path.</p>
+            <h3 class="font-bold text-neutral-900">Need a serious system but not sure where to start?</h3>
+            <p class="mt-1 text-xs leading-5 text-neutral-700">Tell us the workflow. We will recommend the right product architecture and launch path.</p>
           </div>
-          <svg class="h-5 w-5 shrink-0 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="h-5 w-5 shrink-0 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
           </svg>
         </div>
@@ -188,39 +197,39 @@ const launchParticles = [
   <section class="relative px-4 py-10">
     <div class="mx-auto max-w-lg">
       <div class="mobile-reveal mb-7">
-        <p class="mb-3 text-xs font-bold uppercase tracking-[0.28em] text-secondary-300">Built for real operations</p>
-        <h2 class="font-display text-3xl font-bold leading-tight text-white">Platforms, apps, and business systems with measurable outcomes.</h2>
+        <p class="mb-3 text-xs font-bold uppercase tracking-[0.28em] text-secondary-700">Built for real operations</p>
+        <h2 class="font-display text-3xl font-bold leading-tight text-neutral-900">Platforms, apps, and business systems with measurable outcomes.</h2>
       </div>
 
       <div class="mobile-proof-stack space-y-4">
         {featuredStudies.map((study, index) => (
           <a
             href={`/portfolio/${study.slug}/`}
-            class="mobile-proof-card mobile-reveal group block overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.08] shadow-2xl shadow-black/20 backdrop-blur-xl"
+            class="mobile-proof-card mobile-reveal group block overflow-hidden rounded-[2rem] border border-neutral-200/90 bg-white shadow-xl shadow-neutral-900/[0.06] backdrop-blur-xl"
           >
             {study.coverImage && (
-              <div class="relative aspect-[16/10] overflow-hidden bg-white/5">
+              <div class="relative aspect-[16/10] overflow-hidden bg-neutral-100">
                 <img
                   src={study.coverImage}
                   alt={`${study.title} product preview`}
                   class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   loading={index === 0 ? 'eager' : 'lazy'}
                 />
-                <div class="absolute inset-0 bg-gradient-to-t from-[#071124] via-transparent to-transparent"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-neutral-50 via-transparent to-transparent"></div>
               </div>
             )}
             <div class="-mt-10 p-5 pt-0 relative">
               <div class="mb-3 flex flex-wrap gap-2">
                 {study.services.slice(0, 2).map((service) => (
-                  <span class="rounded-full bg-white/12 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white/72">{service}</span>
+                  <span class="rounded-full bg-neutral-100 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-neutral-700">{service}</span>
                 ))}
               </div>
-              <h3 class="text-xl font-bold text-white">{study.title}</h3>
+              <h3 class="text-xl font-bold text-neutral-900">{study.title}</h3>
               <div class="mt-4 grid grid-cols-2 gap-2">
                 {study.results.slice(0, 2).map((result) => (
-                  <div class="rounded-2xl bg-white/[0.08] p-3 ring-1 ring-white/10">
-                    <div class="text-lg font-bold text-secondary-300">{result.value}</div>
-                    <div class="mt-1 text-[11px] leading-4 text-white/58">{result.metric}</div>
+                  <div class="rounded-2xl bg-neutral-50 p-3 ring-1 ring-neutral-200/90">
+                    <div class="text-lg font-bold text-secondary-600">{result.value}</div>
+                    <div class="mt-1 text-[11px] leading-4 text-neutral-600">{result.metric}</div>
                   </div>
                 ))}
               </div>
@@ -234,20 +243,20 @@ const launchParticles = [
   <section class="relative px-4 py-10">
     <div class="mx-auto max-w-lg">
       <div class="mobile-reveal mb-7">
-        <p class="mb-3 text-xs font-bold uppercase tracking-[0.28em] text-secondary-300">From operation to product</p>
-        <h2 class="font-display text-3xl font-bold leading-tight text-white">A clear path from business need to production software.</h2>
+        <p class="mb-3 text-xs font-bold uppercase tracking-[0.28em] text-secondary-700">From operation to product</p>
+        <h2 class="font-display text-3xl font-bold leading-tight text-neutral-900">A clear path from business need to production software.</h2>
       </div>
 
       <div class="mobile-timeline relative space-y-4 pl-5">
-        <div class="mobile-timeline-rail absolute left-[0.45rem] top-2 h-[calc(100%-1rem)] w-px overflow-hidden bg-white/12">
-          <div class="mobile-timeline-fill h-full w-full origin-top bg-gradient-to-b from-secondary-300 to-primary-300"></div>
+        <div class="mobile-timeline-rail absolute left-[0.45rem] top-2 h-[calc(100%-1rem)] w-px overflow-hidden bg-neutral-200">
+          <div class="mobile-timeline-fill h-full w-full origin-top bg-gradient-to-b from-secondary-400 to-primary-400"></div>
         </div>
         {processSteps.map((step) => (
           <div class:list={[
-            'mobile-timeline-step mobile-reveal relative rounded-[1.6rem] border border-white/10 bg-white/[0.07] p-4 backdrop-blur-xl',
+            'mobile-timeline-step mobile-reveal relative rounded-[1.6rem] border border-neutral-200/90 bg-white/95 p-4 backdrop-blur-xl shadow-md shadow-neutral-900/[0.04]',
             step.label === '04' ? 'mobile-launch-step overflow-hidden' : '',
           ]}>
-            <div class="absolute -left-[1.7rem] top-5 h-4 w-4 rounded-full border-2 border-[#071124] bg-secondary-300 shadow-lg shadow-secondary-400/30"></div>
+            <div class="absolute -left-[1.7rem] top-5 h-4 w-4 rounded-full border-2 border-neutral-50 bg-secondary-400 shadow-md shadow-secondary-400/25"></div>
             {step.label === '04' && (
               <div class="mobile-launch-burst pointer-events-none absolute inset-0" aria-hidden="true">
                 <span class="mobile-launch-halo"></span>
@@ -262,9 +271,9 @@ const launchParticles = [
                 ))}
               </div>
             )}
-            <div class="mb-3 inline-flex rounded-full bg-white/10 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white/60">{step.label}</div>
-            <h3 class="text-lg font-bold text-white">{step.title}</h3>
-            <p class="mt-2 text-sm leading-6 text-white/62">{step.body}</p>
+            <div class="mb-3 inline-flex rounded-full bg-neutral-100 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-neutral-600">{step.label}</div>
+            <h3 class="text-lg font-bold text-neutral-900">{step.title}</h3>
+            <p class="mt-2 text-sm leading-6 text-neutral-700">{step.body}</p>
           </div>
         ))}
       </div>
@@ -273,32 +282,32 @@ const launchParticles = [
 
   <section class="relative px-4 py-10 pb-28">
     <div class="mx-auto max-w-lg">
-      <div class="mobile-founder-card mobile-reveal overflow-hidden rounded-[2rem] border border-white/12 bg-gradient-to-br from-white/[0.14] to-white/[0.06] p-5 shadow-2xl shadow-black/25 backdrop-blur-xl">
+      <div class="mobile-founder-card mobile-reveal overflow-hidden rounded-[2rem] border border-neutral-200/90 bg-gradient-to-br from-white to-primary-50/60 p-5 shadow-xl shadow-neutral-900/[0.07] backdrop-blur-xl">
         <div class="flex items-center gap-4">
           <div class="relative shrink-0">
-            <div class="absolute inset-0 rounded-full bg-secondary-300 blur-xl opacity-40"></div>
+            <div class="absolute inset-0 rounded-full bg-secondary-200 blur-xl opacity-50"></div>
             <img
               src="/images/tinsae-avatar.webp"
               alt={`${company.ceo}, founder of ${company.name}`}
               width="88"
               height="88"
-              class="relative h-20 w-20 rounded-full border-2 border-white/25 object-cover shadow-xl"
+              class="relative h-20 w-20 rounded-full border-2 border-neutral-200 object-cover shadow-lg shadow-neutral-900/[0.08]"
               loading="lazy"
             />
           </div>
           <div>
-            <p class="text-xs font-bold uppercase tracking-[0.24em] text-secondary-300">Founder note</p>
-            <h2 class="mt-2 font-display text-2xl font-bold leading-tight text-white">Let us turn your workflow into software your team can rely on.</h2>
+            <p class="text-xs font-bold uppercase tracking-[0.24em] text-secondary-700">Founder note</p>
+            <h2 class="mt-2 font-display text-2xl font-bold leading-tight text-neutral-900">Let us turn your workflow into software your team can rely on.</h2>
           </div>
         </div>
-        <p class="mt-5 text-sm leading-6 text-white/68">
+        <p class="mt-5 text-sm leading-6 text-neutral-700">
           I am {company.ceo}. If you are planning a mobile app, custom platform, or internal business system, start with a consultation and we will map the most practical way to build it.
         </p>
         <div class="mt-5 grid grid-cols-2 gap-3">
           <a href="/contact/" class="rounded-2xl bg-secondary-400 px-4 py-3 text-center text-sm font-bold text-white shadow-lg shadow-secondary-500/25 active:scale-[0.98]">
             Start project
           </a>
-          <a href={`tel:${company.phoneRaw}`} class="rounded-2xl border border-white/15 bg-white/[0.08] px-4 py-3 text-center text-sm font-bold text-white active:scale-[0.98]">
+          <a href={`tel:${company.phoneRaw}`} class="rounded-2xl border border-neutral-300 bg-white px-4 py-3 text-center text-sm font-bold text-neutral-900 shadow-sm active:scale-[0.98]">
             Call now
           </a>
         </div>
@@ -307,11 +316,11 @@ const launchParticles = [
   </section>
 
   <div id="mobile-sticky-cta" class="fixed inset-x-0 bottom-0 z-40 px-4 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-3 transition-all duration-300">
-    <div class="mx-auto flex max-w-lg items-center gap-3 rounded-[1.35rem] border border-white/14 bg-[#071124]/88 p-2 shadow-2xl shadow-black/30 backdrop-blur-xl">
+    <div class="mx-auto flex max-w-lg items-center gap-3 rounded-[1.35rem] border border-neutral-200/95 bg-white/95 p-2 shadow-xl shadow-neutral-900/[0.08] backdrop-blur-xl">
       <a href="/contact/" class="flex flex-1 items-center justify-center rounded-2xl bg-secondary-400 px-4 py-3 text-sm font-bold text-white shadow-lg shadow-secondary-500/20">
         Start Your Project
       </a>
-      <a href={`tel:${company.phoneRaw}`} class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/10 text-white" aria-label={`Call ${company.name}`}>
+      <a href={`tel:${company.phoneRaw}`} class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-neutral-100 text-neutral-800 ring-1 ring-neutral-200/90" aria-label={`Call ${company.name}`}>
         <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 5a2 2 0 012-2h2.2a1 1 0 01.95.68l1.1 3.3a1 1 0 01-.45 1.18l-1.4.82a12.2 12.2 0 005.62 5.62l.82-1.4a1 1 0 011.18-.45l3.3 1.1a1 1 0 01.68.95V19a2 2 0 01-2 2h-.5C9.49 21 3 14.51 3 6.5V5z" />
         </svg>
