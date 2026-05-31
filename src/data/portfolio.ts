@@ -42,6 +42,27 @@ export const caseStudies: CaseStudy[] = [
     featuredRank: 1,
   },
   {
+    slug: 'arada-mart',
+    title: 'Arada Mart — Retail POS & Inventory System',
+    client: 'Arada Mart',
+    industry: 'Retail / FMCG',
+    services: ['Custom Software', 'Web App Development', 'UI/UX Design'],
+    challenge:
+      'Small retail kiosks selling cosmetics, detergents, and fast-moving consumer goods often rely on spreadsheets and guesswork for stock. Cashiers need a fast, touch-friendly checkout on tablets during peak hours, while owners need accurate profit visibility, FIFO costing, and tight control over sensitive actions — all on connections that drop frequently.',
+    solution:
+      'We built Arada Mart as a responsive web POS and inventory platform on Next.js and Convex. Cashiers get a tablet-first POS with multiple active customer carts, shift open/close, split payments (cash, Telebirr, CBE), and offline-first sales that queue in IndexedDB and sync with idempotency when connectivity returns. Managers oversee shelf and back-store stock, purchase batches with expiry tracking, bulk price tiers, approval queues for corrections and stock movements, shift reconciliation, and profit reports driven by FIFO batch costing — from mobile browsers. Role-based access hides buying prices and margins from cashiers while preserving immutable sale history and full audit trails on every critical action.',
+    results: [
+      { metric: 'POS workflow', value: 'Multi-cart', description: 'Concurrent customer tabs with quick one-item sell flow' },
+      { metric: 'Costing', value: 'FIFO batches', description: 'COGS and profit tied to purchase batches, not catalog averages' },
+      { metric: 'Offline', value: 'Queue + sync', description: 'Local sales with idempotent sync and manager conflict review' },
+      { metric: 'Controls', value: 'RBAC + approvals', description: 'Cashier, manager, and owner roles with gated sensitive actions' },
+    ],
+    technologies: ['Next.js', 'React', 'Convex', 'TypeScript', 'Tailwind CSS', 'IndexedDB', 'Convex Auth'],
+    metaTitle: 'Arada Mart POS & Inventory | Arada Tech',
+    metaDescription:
+      'Arada Mart: a responsive web POS and inventory platform for retail kiosks with real-time stock, FIFO profit costing, role-based access, manager approvals, and offline-first sales sync.',
+  },
+  {
     slug: 'hrms-human-resource-management',
     title: 'Human Resource Management System (HRMS)',
     client: 'Enterprise HRMS',
