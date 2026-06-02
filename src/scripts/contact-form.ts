@@ -13,10 +13,6 @@ export function initContactForm() {
     const name = (form.querySelector('[name="name"]') as HTMLInputElement)?.value.trim();
     const email = (form.querySelector('[name="email"]') as HTMLInputElement)?.value.trim();
     const message = (form.querySelector('[name="message"]') as HTMLTextAreaElement)?.value.trim();
-    const honeypot = (form.querySelector('[name="website"]') as HTMLInputElement)?.value;
-
-    if (honeypot) return; // Bot detected
-
     if (!name || !email || !message) {
       showError('Please fill in all required fields.');
       return;

@@ -18,6 +18,11 @@
 
 RewriteEngine On
 
+# Disable LiteSpeed CAPTCHA/bot verification for this site when enabled by the host.
+<IfModule LiteSpeed>
+  RewriteRule .* - [E=verifycaptcha:off]
+</IfModule>
+
 # Prefer static index only (avoid stale index.php taking precedence)
 DirectoryIndex index.html
 

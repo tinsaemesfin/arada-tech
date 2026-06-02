@@ -61,6 +61,7 @@ export const caseStudies: CaseStudy[] = [
     metaTitle: 'Arada Mart POS & Inventory | Arada Tech',
     metaDescription:
       'Arada Mart: a responsive web POS and inventory platform for retail kiosks with real-time stock, FIFO profit costing, role-based access, manager approvals, and offline-first sales sync.',
+    coverImage: '/images/portfolio/arada-mart.png',
   },
   {
     slug: 'hrms-human-resource-management',

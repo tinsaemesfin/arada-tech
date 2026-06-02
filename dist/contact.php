@@ -9,12 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-// Honeypot check
-if (!empty($_POST['website'])) {
-    echo json_encode(['success' => true]);
-    exit;
-}
-
 // Sanitize inputs
 $name    = filter_var(trim($_POST['name'] ?? ''), FILTER_SANITIZE_SPECIAL_CHARS);
 $email   = filter_var(trim($_POST['email'] ?? ''), FILTER_SANITIZE_EMAIL);
