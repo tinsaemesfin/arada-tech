@@ -5,7 +5,24 @@ const categoryColors: Record<string, { bg: string; text: string; dot: string }> 
   Design: { bg: 'bg-purple-50', text: 'text-purple-600', dot: 'bg-purple-500' },
 };
 
-const posts = [
+const posts: {
+  title: string;
+  excerpt: string;
+  href: string;
+  category: string;
+  date: string;
+  readTime: string;
+  image?: string;
+}[] = [
+  {
+    title: "Don't Start With the App. Start With the Workflow.",
+    excerpt: 'Most teams jump straight to screens, then wonder why nobody uses what they built. Map how work actually happens first. Then build.',
+    href: '/blog/start-with-the-workflow/',
+    category: 'Business',
+    date: 'September 14, 2026',
+    readTime: '4 min read',
+    image: '/images/blog/start-with-the-workflow.png',
+  },
   {
     title: 'How Much Does a Custom Website Cost in Ethiopia?',
     excerpt: 'A comprehensive guide to website development pricing in Ethiopia, covering factors that influence cost and what to expect.',
@@ -21,14 +38,6 @@ const posts = [
     category: 'Technology',
     date: 'March 8, 2026',
     readTime: '6 min read',
-  },
-  {
-    title: '5 Signs Your Business Has Outgrown Its WordPress Website',
-    excerpt: 'Recognizing when your WordPress site is holding your business back and what to do about it.',
-    href: '/blog/signs-your-business-outgrown-wordpress/',
-    category: 'Business',
-    date: 'February 28, 2026',
-    readTime: '5 min read',
   },
 ];
 ---
@@ -55,14 +64,24 @@ const posts = [
             <a href={post.href} class="group block">
               <div class="bg-white rounded-2xl border border-neutral-200/60 overflow-hidden h-full hover:shadow-xl hover:shadow-neutral-900/5 hover:-translate-y-1 transition-all duration-300">
                 <div class="relative aspect-[16/10] bg-gradient-to-br from-primary-100 via-primary-50 to-secondary-50 overflow-hidden">
-                  <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-primary-200/40 via-transparent to-secondary-200/40"></div>
-                  <div class="absolute inset-0 flex items-center justify-center">
-                    <div class="w-14 h-14 rounded-xl bg-white/50 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                      <svg class="w-7 h-7 text-primary-300" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
-                      </svg>
-                    </div>
-                  </div>
+                  {post.image ? (
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+                  ) : (
+                    <>
+                      <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-primary-200/40 via-transparent to-secondary-200/40"></div>
+                      <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-14 h-14 rounded-xl bg-white/50 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                          <svg class="w-7 h-7 text-primary-300" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                          </svg>
+                        </div>
+                      </div>
+                    </>
+                  )}
                   <div class="absolute top-3 right-3 px-2.5 py-1 bg-white/80 backdrop-blur-sm rounded-full text-xs font-medium text-neutral-600">
                     {post.readTime}
                   </div>
