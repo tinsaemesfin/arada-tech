@@ -1,0 +1,142 @@
+---
+/**
+ * Arada Mart's signature: a register receipt that prints out of the phone, splits the payment
+ * between cash and Telebirr, and gets stamped PAID. Plays when a parent `[data-product-live]`
+ * appears; renders in its final state without JS or with reduced motion.
+ */
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+
+const items = [
+  ['Teff, 5 kg', '620.00'],
+  ['Sunflower oil, 3 L', '465.00'],
+  ['Sugar, 1 kg', '129.00'],
+];
+---
+
+<svg
+  class:list={['mart-receipt', className]}
+  viewBox="0 0 240 230"
+  fill="none"
+  role="img"
+  aria-label="Illustration: a shop receipt for 1,214 birr split between cash and Telebirr, stamped paid."
+>
+  <defs>
+    <clipPath id="mart-receipt-clip"><rect x="0" y="17" width="240" height="213" /></clipPath>
+  </defs>
+  <g clip-path="url(#mart-receipt-clip)">
+  <g class="mart-receipt__paper">
+    <path
+      d="M40 18h160v190l-8 7-8-7-8 7-8-7-8 7-8-7-8 7-8-7-8 7-8-7-8 7-8-7-8 7-8-7-8 7-8-7-8 7-8-7-8 7z"
+      fill="#fff"
+      stroke="#c7d2fe"
+    />
+    <text x="54" y="40" class="mart-receipt__mono" font-size="8" font-weight="700" fill="#1e1b4b" letter-spacing="1.5">ARADA MART</text>
+    <text x="186" y="40" class="mart-receipt__mono" font-size="7" fill="#6366f1" text-anchor="end">#0418</text>
+    <path d="M54 48h132" stroke="#c7d2fe" stroke-dasharray="2 2" />
+
+    {items.map(([name, price], i) => (
+      <g class="mart-receipt__line" style={`--i:${i}`}>
+        <text x="54" y={64 + i * 15} class="mart-receipt__mono" font-size="7.5" fill="#334155">{name}</text>
+        <text x="186" y={64 + i * 15} class="mart-receipt__mono" font-size="7.5" fill="#334155" text-anchor="end">{price}</text>
+      </g>
+    ))}
+
+    <path d="M54 104h132" stroke="#c7d2fe" stroke-dasharray="2 2" />
+    <g class="mart-receipt__line" style="--i:3">
+      <text x="54" y="119" class="mart-receipt__mono" font-size="8" font-weight="700" fill="#1e1b4b">TOTAL</text>
+      <text x="186" y="119" class="mart-receipt__mono" font-size="8" font-weight="700" fill="#1e1b4b" text-anchor="end">1,214.00</text>
+    </g>
+
+    <!-- Split payment bar -->
+    <g class="mart-receipt__line" style="--i:4">
+      <rect x="54" y="130" width="132" height="8" rx="1" fill="#eef2ff" />
+      <rect class="mart-receipt__split-a" x="54" y="130" width="44" height="8" rx="1" fill="#a5b4fc" />
+      <rect class="mart-receipt__split-b" x="98" y="130" width="88" height="8" rx="1" fill="#4f46e5" />
+      <text x="54" y="152" class="mart-receipt__mono" font-size="6.5" fill="#475569">Cash 400</text>
+      <text x="186" y="152" class="mart-receipt__mono" font-size="6.5" fill="#3730a3" text-anchor="end">Telebirr 814</text>
+    </g>
+
+    <g class="mart-receipt__line" style="--i:5">
+      <rect x="54" y="166" width="5" height="5" fill="#4f46e5" />
+      <text x="64" y="171" class="mart-receipt__mono mart-receipt__queued" font-size="6.5" fill="#64748b">Queued offline</text>
+      <text x="64" y="171" class="mart-receipt__mono mart-receipt__synced" font-size="6.5" fill="#3730a3">Synced</text>
+    </g>
+
+    <!-- PAID stamp -->
+    <g class="mart-receipt__stamp">
+      <rect x="128" y="160" width="58" height="26" rx="3" stroke="#4f46e5" stroke-width="2" transform="rotate(-12 157 173)" />
+      <text x="157" y="177" class="mart-receipt__mono" font-size="12" font-weight="800" fill="#4f46e5" text-anchor="middle" letter-spacing="2" transform="rotate(-12 157 173)">PAID</text>
+    </g>
+  </g>
+  </g>
+
+  <!-- Printer slot, drawn over the paper -->
+  <rect x="22" y="8" width="196" height="14" rx="3" fill="#1e1b4b" />
+  <rect x="34" y="16" width="172" height="3" rx="1.5" fill="#0f0d2e" />
+</svg>
+
+<style>
+  .mart-receipt {
+    display: block;
+    width: 100%;
+    max-width: 290px;
+    overflow: visible;
+  }
+  .mart-receipt__mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  .mart-receipt__paper,
+  .mart-receipt__line,
+  .mart-receipt__stamp,
+  .mart-receipt__queued,
+  .mart-receipt__synced {
+    transition:
+      transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.4s ease;
+  }
+  .mart-receipt__line {
+    transition-delay: calc(0.35s + var(--i) * 0.12s);
+  }
+  .mart-receipt__stamp {
+    transform-box: fill-box;
+    transform-origin: center;
+    transition-delay: 1.3s;
+  }
+  .mart-receipt__queued {
+    opacity: 0;
+  }
+  .mart-receipt__synced {
+    transition-delay: 1.6s;
+  }
+
+  /* Armed by JS: the receipt starts inside the printer. */
+  :global([data-product-armed]:not([data-product-live])) .mart-receipt__paper {
+    transform: translateY(-205px);
+  }
+  :global([data-product-armed]:not([data-product-live])) .mart-receipt__line {
+    opacity: 0;
+  }
+  :global([data-product-armed]:not([data-product-live])) .mart-receipt__stamp {
+    opacity: 0;
+    transform: scale(1.6);
+  }
+  :global([data-product-armed]:not([data-product-live])) .mart-receipt__queued {
+    opacity: 1;
+  }
+  :global([data-product-armed]:not([data-product-live])) .mart-receipt__synced {
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mart-receipt__paper,
+    .mart-receipt__line,
+    .mart-receipt__stamp,
+    .mart-receipt__queued,
+    .mart-receipt__synced {
+      transition: none;
+    }
+  }
+</style>

@@ -5,7 +5,7 @@
  * parent `.rent-collect` element is hovered. Renders fully filled without JS or with reduced motion.
  */
 interface Props {
-  size?: 'sm' | 'lg';
+  size?: 'sm' | 'md' | 'lg';
   /** Building name on the roof (lg only). */
   name?: string;
   class?: string;
@@ -14,8 +14,9 @@ interface Props {
 const { size = 'sm', name = 'Bole Heights', class: className = '' } = Astro.props;
 
 // p = paid, d = due, l = overdue, v = vacant. Top floor first.
-const floors: Record<'sm' | 'lg', string[]> = {
+const floors: Record<'sm' | 'md' | 'lg', string[]> = {
   sm: ['ppdp', 'dlvp', 'ppdl', 'pdpp', 'ppvd'],
+  md: ['ppdp', 'dlvp', 'ppdl', 'pdpp', 'ppvd', 'pdpp'],
   lg: ['ppdp', 'dlvp', 'pdpl', 'ppdp', 'vdpd', 'ppdp', 'pdpp'],
 };
 const rows = floors[size];
@@ -79,6 +80,10 @@ let order = 0;
     display: inline-flex;
     flex-direction: column;
     align-items: stretch;
+  }
+  .rent-facade--md {
+    --rf-gap: 5px;
+    --rf-unit: 36px;
   }
   .rent-facade--lg {
     --rf-gap: 6px;

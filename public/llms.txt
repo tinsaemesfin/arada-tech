@@ -32,6 +32,7 @@ Custom websites, web applications, mobile apps (iOS/Android and cross-platform),
 ## Products
 - AradaRent: https://rent.aradatech.com/ — rent and property management for buildings in Ethiopia.
 - Arada Mart: https://mart.aradatech.com/ — phone register and shelf stock for mini-markets. The receipt that runs the shop.
+- Arada Agency: https://agency.aradatech.com/ — CRM and commission software for real estate sales agencies in Ethiopia.
 
 ## Longer context
 See https://www.aradatech.com/llms-full.txt

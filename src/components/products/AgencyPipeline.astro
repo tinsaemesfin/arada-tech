@@ -1,0 +1,120 @@
+---
+/**
+ * Arada Agency's signature: a sales pipeline where a reserved unit moves to Sold and its commission
+ * splits between the credited agents. Plays when a parent `[data-product-live]` appears; renders in
+ * its final state without JS or with reduced motion.
+ */
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+
+const cols = [
+  { x: 4, label: 'Lead' },
+  { x: 90, label: 'Reserved' },
+  { x: 176, label: 'Sold' },
+];
+// Static cards: [column, row, unit, initials]
+const cards: [number, number, string, string][] = [
+  [0, 0, 'B-1204', 'SA'],
+  [0, 1, 'C-0302', 'HM'],
+  [0, 2, 'A-0907', 'SA'],
+  [1, 1, 'A-0211', 'HM'],
+  [2, 0, 'C-1101', 'SA'],
+];
+const cardY = (row: number) => 32 + row * 32;
+---
+
+<svg
+  class:list={['agency-pipe', className]}
+  viewBox="0 0 260 236"
+  fill="none"
+  role="img"
+  aria-label="Illustration: a sales pipeline where unit B-0704 moves from Reserved to Sold and its commission of 84,000 birr splits 60/40 between two agents."
+>
+  {cols.map((c) => (
+    <g>
+      <text x={c.x + 2} y="14" class="agency-pipe__mono" font-size="7" fill="#586257" letter-spacing="1">{c.label.toUpperCase()}</text>
+      <rect x={c.x} y="22" width="80" height="122" rx="4" fill="#fff" stroke="#e1e6dc" />
+    </g>
+  ))}
+
+  {cards.map(([col, row, unit, who]) => (
+    <g transform={`translate(${cols[col].x + 6} ${cardY(row)})`}>
+      <rect width="68" height="24" rx="3" fill="#f8f9f6" stroke="#e1e6dc" />
+      <circle cx="11" cy="12" r="6.5" fill="#eff3ec" stroke="#c6d5a5" />
+      <text x="11" y="14.5" class="agency-pipe__mono" font-size="5.5" fill="#345e4f" text-anchor="middle">{who}</text>
+      <text x="22" y="11" class="agency-pipe__mono" font-size="6.5" fill="#1d2621">{unit}</text>
+      <rect x="22" y="15" width="30" height="2.5" rx="1" fill="#e1e6dc" />
+    </g>
+  ))}
+
+  <!-- The unit that closes -->
+  <g class="agency-pipe__mover">
+    <g transform={`translate(${cols[1].x + 6} ${cardY(0)})`}>
+      <rect width="68" height="24" rx="3" fill="#345e4f" />
+      <circle cx="11" cy="12" r="6.5" fill="#c6d5a5" />
+      <text x="11" y="14.5" class="agency-pipe__mono" font-size="5.5" fill="#213a30" text-anchor="middle">SA</text>
+      <text x="22" y="11" class="agency-pipe__mono" font-size="6.5" fill="#fff">B-0704</text>
+      <rect x="22" y="15" width="38" height="2.5" rx="1" fill="#c6d5a5" />
+    </g>
+  </g>
+
+  <!-- Commission split -->
+  <g class="agency-pipe__ledger">
+    <rect x="4" y="156" width="252" height="74" rx="4" fill="#fff" stroke="#e1e6dc" />
+    <text x="16" y="174" class="agency-pipe__mono" font-size="6.5" fill="#586257" letter-spacing="1">COMMISSION · B-0704</text>
+    <text x="244" y="174" class="agency-pipe__mono agency-pipe__amount" font-size="9" font-weight="700" fill="#1d2621" text-anchor="end">ETB 84,000.00</text>
+    <rect x="16" y="184" width="228" height="12" rx="2" fill="#eff3ec" />
+    <rect class="agency-pipe__split" x="16" y="184" width="136.8" height="12" rx="2" fill="#345e4f" />
+    <rect class="agency-pipe__split agency-pipe__split--b" x="152.8" y="184" width="91.2" height="12" rx="2" fill="#c6d5a5" />
+    <text x="16" y="214" class="agency-pipe__mono" font-size="6.5" fill="#284a3e">SA · 60% · 50,400.00</text>
+    <text x="244" y="214" class="agency-pipe__mono" font-size="6.5" fill="#586257" text-anchor="end">HM · 40% · 33,600.00</text>
+  </g>
+</svg>
+
+<style>
+  .agency-pipe {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    overflow: visible;
+  }
+  .agency-pipe__mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  .agency-pipe__mover {
+    transform: translate(86px, 32px);
+    transition: transform 1s cubic-bezier(0.65, 0, 0.35, 1) 0.4s;
+  }
+  .agency-pipe__split {
+    transform-box: fill-box;
+    transform-origin: left center;
+    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) 1.4s;
+  }
+  .agency-pipe__split--b {
+    transition-delay: 1.65s;
+  }
+  .agency-pipe__amount {
+    transition: opacity 0.4s ease 1.3s;
+  }
+
+  /* Armed by JS: the unit is still in Reserved and nothing is split yet. */
+  :global([data-product-armed]:not([data-product-live])) .agency-pipe__mover {
+    transform: translate(0, 0);
+  }
+  :global([data-product-armed]:not([data-product-live])) .agency-pipe__split {
+    transform: scaleX(0);
+  }
+  :global([data-product-armed]:not([data-product-live])) .agency-pipe__amount {
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .agency-pipe__mover,
+    .agency-pipe__split,
+    .agency-pipe__amount {
+      transition: none;
+    }
+  }
+</style>

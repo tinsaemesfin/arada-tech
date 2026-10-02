@@ -1,56 +1,86 @@
 ---
 import RentFacade from '@components/products/RentFacade.astro';
-import ReceiptDrawing from '@components/products/ReceiptDrawing.astro';
+import MartReceipt from '@components/products/MartReceipt.astro';
+import AgencyPipeline from '@components/products/AgencyPipeline.astro';
 import { products } from '@data/products';
 
 const host = (url: string) => new URL(url).host;
+
+// One line under each drawing, read like a figure caption.
+const captions: Record<string, string> = {
+  'rent-facade': 'Units fill as rent is paid. Hover to collect the overdue ones.',
+  receipt: 'Prints, splits cash and Telebirr, syncs when the internet is back.',
+  pipeline: 'A reserved unit sells and the commission splits to the santim.',
+};
 ---
 
-<section class="border-y border-neutral-200 bg-neutral-50" id="products" aria-labelledby="products-heading">
-  <div class="section-padding py-10 md:py-14">
-    <div class="section-container grid gap-6 md:grid-cols-[13rem_1fr] md:gap-10 md:items-center">
-      <div>
-        <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-neutral-500 mb-2">
-          Products <span class="text-neutral-400">/ {String(products.length).padStart(2, '0')}</span>
+<section class="products bg-white" id="products" aria-labelledby="products-heading">
+  <div class="section-padding py-20 md:py-28">
+    <div class="section-container">
+      <header class="grid gap-6 border-b border-neutral-200 pb-10 md:grid-cols-[1fr_auto] md:items-end md:gap-12">
+        <div>
+          <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-neutral-500 mb-4">
+            Products <span class="text-neutral-400">/ {String(products.length).padStart(2, '0')}</span>
+          </p>
+          <h2 id="products-heading" class="font-display text-3xl font-bold leading-[1.1] tracking-tight text-neutral-900 md:text-4.5xl max-w-2xl">
+            Software we build and run ourselves.
+          </h2>
+        </div>
+        <p class="max-w-sm text-base leading-relaxed text-neutral-600">
+          Each product is built around one Ethiopian workflow, and each one keeps its own look. The colours below are the products' own.
         </p>
-        <h2 id="products-heading" class="font-display text-xl font-bold leading-snug text-neutral-900">
-          Software we build and run ourselves.
-        </h2>
-      </div>
+      </header>
 
-      <ul class="flex flex-col gap-3">
+      <ul class="mt-10 grid gap-6 lg:grid-cols-3">
         {products.map((product, i) => (
-          <li>
-            <a
-              href={product.url}
-              class="rent-collect group grid grid-cols-[auto_1fr] items-center gap-x-5 gap-y-4 rounded-xl border border-neutral-200 bg-white p-4 pr-5 transition-colors hover:border-neutral-900 focus-visible:border-neutral-900 sm:gap-x-7 md:grid-cols-[auto_1fr_auto]"
-            >
-              {product.illustration === 'receipt' ? <ReceiptDrawing class="self-center" /> : <RentFacade class="self-center" />}
+          <li
+            class="product-card"
+            style={`--p-accent:${product.brand.accent};--p-ink:${product.brand.ink};--p-soft:${product.brand.soft};--p-hi:${product.brand.highlight}`}
+            data-product-card
+          >
+            <a href={product.url} class="rent-collect group flex h-full flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white transition-colors duration-300 md:grid md:grid-cols-2 lg:flex">
+              <div class="product-card__stage relative flex flex-col">
+                <svg class="pointer-events-none absolute inset-0 h-full w-full" aria-hidden="true">
+                  <defs>
+                    <pattern id={`grid-${product.slug}`} width="16" height="16" patternUnits="userSpaceOnUse">
+                      <path d="M16 0H0V16" fill="none" stroke={product.brand.accent} stroke-opacity="0.12" />
+                    </pattern>
+                  </defs>
+                  <rect width="100%" height="100%" fill={`url(#grid-${product.slug})`} />
+                </svg>
 
-              <div class="min-w-0 self-center">
-                <p class="font-mono text-[11px] uppercase tracking-[0.16em] text-neutral-500">
-                  {String(i + 1).padStart(2, '0')} · {product.category}
+                <div class="relative flex items-center justify-between px-5 pt-5">
+                  <img src={product.mark} alt="" width="32" height="32" class="h-8 w-8" loading="lazy" decoding="async" />
+                  <span class="font-mono text-[11px] tracking-[0.16em] text-[color:var(--p-ink)]">{String(i + 1).padStart(2, '0')}</span>
+                </div>
+
+                <div class="relative flex h-[19rem] items-center justify-center px-6 py-4">
+                  {product.illustration === 'rent-facade' && <RentFacade size="md" />}
+                  {product.illustration === 'receipt' && <MartReceipt />}
+                  {product.illustration === 'pipeline' && <AgencyPipeline />}
+                </div>
+
+                <p class="relative min-h-[3.75rem] border-t border-[color:var(--p-hi)] px-5 py-3 font-mono text-[11px] leading-5 text-[color:var(--p-ink)]">
+                  {product.illustration && captions[product.illustration]}
                 </p>
-                <h3 class="mt-1 font-display text-2xl font-bold tracking-tight text-neutral-900">{product.name}</h3>
-                <p class="mt-1 text-sm leading-relaxed text-neutral-600 max-w-xl">{product.tagline}</p>
               </div>
 
-              <div class="col-span-2 flex items-center justify-between gap-6 border-t border-dashed border-neutral-200 pt-3 md:flex-col md:items-end md:col-span-1 md:border-t-0 md:border-l md:pl-7 md:pt-0">
-                <p class="font-mono text-[11px] leading-5 text-neutral-500 md:text-right">
-                  {product.illustration === 'receipt' ? (
-                    <>
-                      <span class="block group-hover:hidden">Shelf 2 · queued 1</span>
-                      <span class="hidden text-[#047857] group-hover:block">PAID · Telebirr</span>
-                    </>
-                  ) : (
-                    <>
-                      <span class="block group-hover:hidden">2 units overdue</span>
-                      <span class="hidden text-[#047857] group-hover:block">Collected. No chasing.</span>
-                    </>
-                  )}
-                </p>
-                <span class="inline-flex items-center gap-2 font-mono text-xs font-medium text-neutral-900">
-                  {host(product.url)}
+              <div class="flex flex-1 flex-col p-6 md:p-7">
+                <p class="font-mono text-[11px] uppercase tracking-[0.16em] text-[color:var(--p-ink)]">{product.category}</p>
+                <h3 class="mt-2 font-display text-2xl font-bold tracking-tight text-neutral-900 md:text-[1.75rem]">{product.name}</h3>
+                <p class="mt-2 text-[15px] leading-relaxed text-neutral-600">{product.tagline}</p>
+
+                <ul class="mt-5 space-y-2.5 border-t border-neutral-100 pt-5">
+                  {product.features.slice(0, 3).map((f) => (
+                    <li class="flex gap-3 text-sm leading-snug text-neutral-700">
+                      <span class="mt-[0.4em] h-1.5 w-1.5 shrink-0 bg-[color:var(--p-accent)]" aria-hidden="true"></span>
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+
+                <span class="product-card__link mt-auto inline-flex items-center gap-2 self-start pt-7 font-mono text-[13px] font-medium text-[color:var(--p-ink)]">
+                  <span class="product-card__host">{host(product.url)}</span>
                   <svg class="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M9 7h8v8" /></svg>
                 </span>
               </div>
@@ -61,3 +91,56 @@ const host = (url: string) => new URL(url).host;
     </div>
   </div>
 </section>
+
+<style>
+  .product-card__stage {
+    background: var(--p-soft);
+  }
+  .product-card > a {
+    box-shadow: inset 0 3px 0 0 var(--p-accent);
+  }
+  .product-card > a:hover,
+  .product-card > a:focus-visible {
+    border-color: var(--p-accent);
+  }
+  .product-card > a:focus-visible {
+    outline: 2px solid var(--p-accent);
+    outline-offset: 3px;
+  }
+  .product-card__host {
+    text-decoration: underline 1px transparent;
+    text-underline-offset: 4px;
+    transition: text-decoration-color 0.3s ease;
+  }
+  .product-card > a:hover .product-card__host,
+  .product-card > a:focus-visible .product-card__host {
+    text-decoration-color: currentColor;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .product-card__host {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  // Arm the drawings (they start in their "before" state), then play each one when its card is on screen.
+  const cards = document.querySelectorAll<HTMLElement>('[data-product-card]:not([data-product-armed])');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          (entry.target as HTMLElement).dataset.productLive = '';
+          io.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.35 },
+    );
+    cards.forEach((el) => {
+      el.dataset.productArmed = '';
+      io.observe(el);
+    });
+  }
+</script>

@@ -11,7 +11,20 @@ export interface Product {
   description: string;
   features: string[];
   audience: string;
-  illustration?: 'rent-facade' | 'receipt';
+  illustration?: 'rent-facade' | 'receipt' | 'pipeline';
+  /** Colours taken from the product's own design tokens, so each card looks like the product it links to. */
+  brand: {
+    /** Main accent (buttons, paid states). */
+    accent: string;
+    /** Darker accent for text on light backgrounds (AA contrast). */
+    ink: string;
+    /** Flat tinted surface behind the illustration. */
+    soft: string;
+    /** Secondary highlight. */
+    highlight: string;
+  };
+  /** App icon, copied from the product repo into /public/products. */
+  mark: string;
 }
 
 export const products: Product[] = [
@@ -31,6 +44,8 @@ export const products: Product[] = [
     ],
     audience: 'Owners and managers of apartment, office, commercial and mixed-use (G+) buildings',
     illustration: 'rent-facade',
+    brand: { accent: '#047857', ink: '#065f46', soft: '#ecfdf5', highlight: '#10b981' },
+    mark: '/products/aradarent.svg',
   },
   {
     name: 'Arada Mart',
@@ -48,5 +63,26 @@ export const products: Product[] = [
     ],
     audience: 'Owners and cashiers of mini-markets, kiosks, and small shops in Ethiopia',
     illustration: 'receipt',
+    brand: { accent: '#4f46e5', ink: '#3730a3', soft: '#eef2ff', highlight: '#a5b4fc' },
+    mark: '/products/arada-mart.svg',
+  },
+  {
+    name: 'Arada Agency',
+    slug: 'arada-agency',
+    url: 'https://agency.aradatech.com/',
+    category: 'Real estate agency CRM',
+    tagline: 'Every lead, unit and commission, finally in one place.',
+    description:
+      'Arada Agency is the all-in-one CRM for Ethiopian real estate sales agencies: leads and pipelines, developer inventory and reservations, agreements, exact ETB commission calculation, buyer payments, agent payouts and reports, in English and Amharic.',
+    features: [
+      'Lead pipelines with round-robin and weighted routing to agents',
+      'Developer projects, floors and unit inventory with reservations',
+      'Versioned commission agreements and exact ETB commission splits',
+      'Buyer payments, receipt verification and agent payouts',
+    ],
+    audience: 'Owners, managers, finance staff and agents of real estate sales agencies in Ethiopia',
+    illustration: 'pipeline',
+    brand: { accent: '#345e4f', ink: '#284a3e', soft: '#eff3ec', highlight: '#c6d5a5' },
+    mark: '/products/arada-agency.svg',
   },
 ];
