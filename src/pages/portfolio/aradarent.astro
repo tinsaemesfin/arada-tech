@@ -1,0 +1,112 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumbs from '@components/global/Breadcrumbs.astro';
+import CTA from '@components/global/CTA.astro';
+import RentFacadePanel from '@components/products/RentFacadePanel.astro';
+import { caseStudies } from '@data/portfolio';
+
+const study = caseStudies.find((s) => s.slug === 'aradarent')!;
+const breadcrumbs = [
+  { name: 'Portfolio', href: '/portfolio/' },
+  { name: study.title, href: `/portfolio/${study.slug}/` },
+];
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: study.title,
+  description: study.challenge,
+  url: new URL(`/portfolio/${study.slug}/`, Astro.site).href,
+  creator: { '@type': 'Organization', name: 'Arada Tech', url: 'https://www.aradatech.com' },
+  about: {
+    '@type': 'SoftwareApplication',
+    name: 'AradaRent',
+    url: study.liveUrl,
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web',
+    publisher: { '@id': 'https://www.aradatech.com/#organization' },
+  },
+};
+---
+
+<BaseLayout title={study.metaTitle} description={study.metaDescription} structuredData={structuredData} breadcrumbs={breadcrumbs}>
+  <Breadcrumbs items={breadcrumbs} />
+
+  <article class="section-padding pb-0">
+    <div class="section-container max-w-4xl">
+      <span class="text-sm font-medium text-secondary-400 uppercase tracking-wider mb-3 block reveal-up">{study.industry}</span>
+      <h1 class="heading-xl mb-4 reveal-up">{study.title}</h1>
+      <div class="flex flex-wrap gap-2 mb-6 reveal-up">
+        {study.services.map((s) => (
+          <span class="text-sm font-medium text-primary-600 bg-primary-50 px-3 py-1.5 rounded-full">{s}</span>
+        ))}
+      </div>
+      <a href={study.liveUrl} class="inline-flex items-center gap-2 font-mono text-sm font-medium text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-900 mb-8 reveal-up">
+        Visit the live product: rent.aradatech.com
+        <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M9 7h8v8" /></svg>
+      </a>
+    </div>
+  </article>
+
+  <section class="section-padding pb-2">
+    <div class="section-container">
+      <div class="rent-collect">
+        <RentFacadePanel />
+      </div>
+    </div>
+  </section>
+
+  <section class="section-gap" id={`${study.slug}-overview`} data-portfolio-target={study.slug}>
+    <div class="section-padding">
+      <div class="section-container max-w-4xl">
+        <div class="grid md:grid-cols-2 gap-12">
+          <div class="reveal-left">
+            <h2 class="heading-md mb-4">The Challenge</h2>
+            <p class="prose-content">{study.challenge}</p>
+          </div>
+          <div class="reveal-right">
+            <h2 class="heading-md mb-4">Our Solution</h2>
+            <p class="prose-content">{study.solution}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-gap bg-neutral-50">
+    <div class="section-padding">
+      <div class="section-container">
+        <h2 class="portfolio-measurable-heading text-center mb-8 sm:mb-12 reveal-up">Measurable Results</h2>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 stagger-children">
+          {study.results.map((result) => (
+            <div class="card text-center min-w-0 p-4 sm:p-6 lg:p-8">
+              <div class="portfolio-measurable-value mb-1.5 sm:mb-2">{result.value}</div>
+              <div class="portfolio-measurable-metric mb-1">{result.metric}</div>
+              <div class="text-xs sm:text-sm text-neutral-500">{result.description}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-gap">
+    <div class="section-padding">
+      <div class="section-container text-center">
+        <h2 class="heading-md mb-6 reveal-up">Technologies Used</h2>
+        <div class="flex flex-wrap justify-center gap-3 stagger-children">
+          {study.technologies.map((tech) => (
+            <span class="px-4 py-2 bg-neutral-50 border border-neutral-200 rounded-full text-sm font-medium text-neutral-700">{tech}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTA variant="gradient" title="Managing a Building in Ethiopia?" description="Start a free 14-day AradaRent trial, or tell us about your property workflow and we can build around it." />
+</BaseLayout>
+
+<script>
+  import { initScrollAnimations } from '@scripts/scroll-animations';
+  initScrollAnimations();
+</script>

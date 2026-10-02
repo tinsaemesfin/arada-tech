@@ -13,6 +13,10 @@ export interface CaseStudy {
   metaDescription: string;
   /** Hero / card image under `public/` (e.g. `/images/portfolio/slug.png`). */
   coverImage?: string;
+  /** Drawn visual used instead of a screenshot (our own products). */
+  illustration?: 'rent-facade';
+  /** Live product URL, for in-house products. */
+  liveUrl?: string;
   /** Homepage portfolio: order 1–3 shows this project in the featured row (first three slots). */
   featuredRank?: 1 | 2 | 3;
 }
@@ -62,6 +66,29 @@ export const caseStudies: CaseStudy[] = [
     metaDescription:
       'Arada Mart: a responsive web POS and inventory platform for retail kiosks with real-time stock, FIFO profit costing, role-based access, manager approvals, and offline-first sales sync.',
     coverImage: '/images/portfolio/arada-mart.png',
+  },
+  {
+    slug: 'aradarent',
+    title: 'AradaRent — Rent Management System',
+    client: 'Arada Tech (in-house product)',
+    industry: 'PropTech / Real Estate',
+    services: ['SaaS Product', 'Web App Development', 'UI/UX Design'],
+    challenge:
+      'Most rental buildings in Addis Ababa are still run from notebooks, Excel sheets and phone calls. Owners of apartment, office and mixed-use (G+) buildings chase tenants for rent every month, match Telebirr and bank transfers to units by hand, write receipts manually, and only find out who is behind when they sit down and count. Generic property software is priced in dollars, ignores mobile money and has no Amharic.',
+    solution:
+      'We designed and built AradaRent as our own multi-tenant SaaS product. Each lease generates its rent invoices automatically on its billing cycle (monthly, quarterly, semi-annual or annual) with escalations and late fees. Tenants get a phone-friendly portal where they upload proof of a Telebirr or bank payment; staff verify it in one click and a numbered receipt goes out automatically. Owners see rent roll, arrears aging, occupancy and income vs expense reports in birr, with staff roles (owner, manager, accountant, maintenance), maintenance requests with photos, announcements by building or unit, and a full audit log. The site and sign-in work in English and Amharic.',
+    results: [
+      { metric: 'Billing', value: 'Automatic', description: 'Invoices, late fees and receipts generated from each lease' },
+      { metric: 'Payments', value: 'Telebirr + bank', description: 'Tenant proof uploads verified in one click' },
+      { metric: 'Tenants', value: 'Self-service', description: 'Portal for payments, maintenance and notices on any phone' },
+      { metric: 'Languages', value: 'EN / አማ', description: 'English and Amharic, priced in Ethiopian birr' },
+    ],
+    technologies: ['Next.js', 'React', 'TypeScript', 'Supabase', 'PostgreSQL', 'Tailwind CSS', 'Vercel'],
+    metaTitle: 'AradaRent Rent Management System | Arada Tech',
+    metaDescription:
+      'AradaRent: rent and property management software for buildings in Addis Ababa, with automatic invoices, Telebirr payment proofs, a tenant portal and reports in birr. Built by Arada Tech.',
+    illustration: 'rent-facade',
+    liveUrl: 'https://rent.aradatech.com/',
   },
   {
     slug: 'hrms-human-resource-management',

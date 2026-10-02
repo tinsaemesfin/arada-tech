@@ -3,6 +3,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import Breadcrumbs from '@components/global/Breadcrumbs.astro';
 import CTA from '@components/global/CTA.astro';
 import PortfolioLaptopMockup from '@components/portfolio/PortfolioLaptopMockup.astro';
+import RentFacadePanel from '@components/products/RentFacadePanel.astro';
 import { caseStudies } from '@data/portfolio';
 
 const breadcrumbs = [{ name: 'Portfolio', href: '/portfolio/' }];
@@ -39,7 +40,7 @@ const structuredData = {
       <div class="section-container">
         <div class="space-y-16 stagger-children">
           {caseStudies.map((study, index) => (
-            <a href={`/portfolio/${study.slug}/`} class="group block">
+            <a href={`/portfolio/${study.slug}/`} class:list={['group block', study.illustration === 'rent-facade' && 'rent-collect']}>
               <div class:list={['grid lg:grid-cols-2 gap-10 items-center', index % 2 !== 0 && 'lg:direction-rtl']}>
                 <div class="relative min-h-0 w-full">
                   {study.coverImage && (
@@ -50,6 +51,7 @@ const structuredData = {
                       class="w-full"
                     />
                   )}
+                  {study.illustration === 'rent-facade' && <RentFacadePanel />}
                   <div
                     class="pointer-events-none absolute inset-0 z-10 rounded-t-[1.25rem] bg-neutral-900/0 transition-colors duration-300 group-hover:bg-neutral-900/10"
                     aria-hidden="true"

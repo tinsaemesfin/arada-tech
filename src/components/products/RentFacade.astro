@@ -1,0 +1,232 @@
+---
+/**
+ * Line drawing of a rental building, the visual signature of AradaRent. Each unit is a lease:
+ * paid units fill in when the drawing scrolls into view, and overdue ones get collected when a
+ * parent `.rent-collect` element is hovered. Renders fully filled without JS or with reduced motion.
+ */
+interface Props {
+  size?: 'sm' | 'lg';
+  /** Building name on the roof (lg only). */
+  name?: string;
+  class?: string;
+}
+
+const { size = 'sm', name = 'Bole Heights', class: className = '' } = Astro.props;
+
+// p = paid, d = due, l = overdue, v = vacant. Top floor first.
+const floors: Record<'sm' | 'lg', string[]> = {
+  sm: ['ppdp', 'dlvp', 'ppdl', 'pdpp', 'ppvd'],
+  lg: ['ppdp', 'dlvp', 'pdpl', 'ppdp', 'vdpd', 'ppdp', 'pdpp'],
+};
+const rows = floors[size];
+const shops = size === 'lg' ? ['p', 'd'] : [];
+
+const all = [...rows.join(''), ...shops];
+const occupied = all.filter((s) => s !== 'v').length;
+const paid = all.filter((s) => s === 'p').length;
+const late = all.filter((s) => s === 'l').length;
+
+const unitLabel = (floor: number, col: number) => `${floor}${'ABCD'[col]}`;
+let order = 0;
+---
+
+<div
+  class:list={['rent-facade', `rent-facade--${size}`, className]}
+  data-rent-facade
+  role="img"
+  aria-label={`Illustration: a building with ${occupied} leased units, ${paid} paid and ${late} overdue.`}
+>
+  {size === 'lg' && <div class="rent-facade__roof font-mono">{name}</div>}
+  <div class="rent-facade__body">
+    {rows.map((row, r) => {
+      const floor = rows.length - r;
+      return (
+        <div class="rent-facade__floor">
+          {size === 'lg' && <span class="rent-facade__level font-mono">{String(floor).padStart(2, '0')}</span>}
+          {[...row].map((state, c) => (
+            <span
+              class:list={['rent-facade__unit', `is-${state}`]}
+              style={`--i:${(rows.length - r) * 4 + c + (order++ % 3)}`}
+            >
+              {size === 'lg' && <span class="rent-facade__tag font-mono">{unitLabel(floor, c)}</span>}
+            </span>
+          ))}
+        </div>
+      );
+    })}
+    {shops.length > 0 && (
+      <div class="rent-facade__floor rent-facade__floor--shops">
+        <span class="rent-facade__level font-mono">G</span>
+        {shops.map((state, c) => (
+          <span class:list={['rent-facade__unit', `is-${state}`]} style={`--i:${c}`}>
+            <span class="rent-facade__tag font-mono">S{c + 1}</span>
+          </span>
+        ))}
+      </div>
+    )}
+  </div>
+  <div class="rent-facade__ground" aria-hidden="true"></div>
+</div>
+
+<style>
+  .rent-facade {
+    --rf-ink: #212529;
+    --rf-line: #dee2e6;
+    --rf-paid: #047857;
+    --rf-late: #b91c1c;
+    --rf-gap: 3px;
+    --rf-unit: 16px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .rent-facade--lg {
+    --rf-gap: 6px;
+    --rf-unit: clamp(28px, 4.2vw, 44px);
+  }
+  .rent-facade__roof {
+    align-self: center;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #495057;
+    padding: 0 0.75rem 0.35rem;
+    border-bottom: 2px solid var(--rf-ink);
+    width: calc(100% - 1.5rem);
+    text-align: center;
+  }
+  .rent-facade__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--rf-gap);
+    padding: calc(var(--rf-gap) * 1.5);
+    border: 1.5px solid var(--rf-ink);
+    border-bottom: 0;
+    background: #fff;
+  }
+  .rent-facade--lg .rent-facade__body {
+    margin-left: 1.75rem;
+  }
+  .rent-facade__floor {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, var(--rf-unit));
+    gap: var(--rf-gap);
+  }
+  .rent-facade__floor--shops {
+    grid-template-columns: repeat(2, calc(var(--rf-unit) * 2 + var(--rf-gap)));
+    margin-top: calc(var(--rf-gap) * 1.5);
+    padding-top: calc(var(--rf-gap) * 1.5);
+    border-top: 1.5px solid var(--rf-ink);
+  }
+  .rent-facade__level {
+    position: absolute;
+    right: calc(100% + var(--rf-gap) * 1.5 + 0.5rem);
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 10px;
+    color: #868e96;
+  }
+  .rent-facade__unit {
+    position: relative;
+    height: calc(var(--rf-unit) * 0.78);
+    border: 1px solid var(--rf-line);
+    background: #fff;
+    transition:
+      background-color 0.35s ease,
+      border-color 0.35s ease;
+    transition-delay: calc(var(--i) * 35ms);
+  }
+  .rent-facade__tag {
+    position: absolute;
+    top: 2px;
+    left: 4px;
+    font-size: 9px;
+    line-height: 1;
+    color: #adb5bd;
+  }
+  .rent-facade__unit.is-p {
+    background: var(--rf-paid);
+    border-color: var(--rf-paid);
+  }
+  .rent-facade__unit.is-p .rent-facade__tag {
+    color: #fff;
+  }
+  .rent-facade__unit.is-l {
+    border-color: var(--rf-late);
+  }
+  .rent-facade__unit.is-l::after {
+    content: '';
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
+    width: 3px;
+    height: 3px;
+    background: var(--rf-late);
+  }
+  .rent-facade--lg .rent-facade__unit.is-l::after {
+    width: 5px;
+    height: 5px;
+    right: 4px;
+    bottom: 4px;
+  }
+  .rent-facade__unit.is-v {
+    background: repeating-linear-gradient(-45deg, transparent 0 3px, #dee2e6 3px 4px);
+  }
+  .rent-facade__ground {
+    height: 1.5px;
+    background: var(--rf-ink);
+    margin: 0 -0.75rem;
+  }
+  .rent-facade--lg .rent-facade__ground {
+    margin-left: 1rem;
+  }
+
+  /* Armed by JS: paid units start empty and fill in once the drawing is on screen. */
+  .rent-facade[data-armed]:not([data-live]) .rent-facade__unit.is-p {
+    background: #fff;
+    border-color: var(--rf-line);
+  }
+  .rent-facade[data-armed]:not([data-live]) .rent-facade__unit.is-p .rent-facade__tag {
+    color: #adb5bd;
+  }
+
+  /* Hovering the parent collects the overdue rent. */
+  :global(.rent-collect:hover) .rent-facade__unit.is-l,
+  :global(.rent-collect:focus-visible) .rent-facade__unit.is-l {
+    background: var(--rf-paid);
+    border-color: var(--rf-paid);
+    transition-delay: 0s;
+  }
+  :global(.rent-collect:hover) .rent-facade__unit.is-l::after,
+  :global(.rent-collect:focus-visible) .rent-facade__unit.is-l::after {
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rent-facade__unit {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const facades = document.querySelectorAll<HTMLElement>('[data-rent-facade]:not([data-armed])');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          (entry.target as HTMLElement).dataset.live = '';
+          io.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.4 },
+    );
+    facades.forEach((el) => {
+      el.dataset.armed = '';
+      io.observe(el);
+    });
+  }
+</script>
