@@ -1,0 +1,11 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+<svg class:list={['h-16 w-14 text-neutral-900', className]} viewBox="0 0 56 72" fill="none" aria-hidden="true">
+  <path d="M8 4h40v56l-6 6-6-6-6 6-6-6-6 6-6-6-4 4V4z" stroke="currentColor" stroke-width="1.5" />
+  <path d="M14 16h28M14 24h20M14 32h24" stroke="currentColor" stroke-dasharray="2 2" />
+  <text x="14" y="48" fill="#047857" font-size="8" font-family="ui-monospace, monospace">PAID</text>
+</svg>

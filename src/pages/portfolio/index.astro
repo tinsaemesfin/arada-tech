@@ -4,6 +4,7 @@ import Breadcrumbs from '@components/global/Breadcrumbs.astro';
 import CTA from '@components/global/CTA.astro';
 import PortfolioLaptopMockup from '@components/portfolio/PortfolioLaptopMockup.astro';
 import RentFacadePanel from '@components/products/RentFacadePanel.astro';
+import ReceiptDrawing from '@components/products/ReceiptDrawing.astro';
 import { caseStudies } from '@data/portfolio';
 
 const breadcrumbs = [{ name: 'Portfolio', href: '/portfolio/' }];
@@ -52,6 +53,7 @@ const structuredData = {
                     />
                   )}
                   {study.illustration === 'rent-facade' && <RentFacadePanel />}
+                  {study.illustration === 'receipt' && <ReceiptDrawing class="mx-auto h-40 w-32" />}
                   <div
                     class="pointer-events-none absolute inset-0 z-10 rounded-t-[1.25rem] bg-neutral-900/0 transition-colors duration-300 group-hover:bg-neutral-900/10"
                     aria-hidden="true"

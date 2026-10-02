@@ -11,6 +11,7 @@ export interface Product {
   description: string;
   features: string[];
   audience: string;
+  illustration?: 'rent-facade' | 'receipt';
 }
 
 export const products: Product[] = [
@@ -29,5 +30,23 @@ export const products: Product[] = [
       'Rent roll, arrears, occupancy and income reports in birr',
     ],
     audience: 'Owners and managers of apartment, office, commercial and mixed-use (G+) buildings',
+    illustration: 'rent-facade',
+  },
+  {
+    name: 'Arada Mart',
+    slug: 'arada-mart',
+    url: 'https://mart.aradatech.com/',
+    category: 'Shop register and stock',
+    tagline: 'The receipt that runs the shop.',
+    description:
+      'Arada Mart is a phone register and shelf-stock system for Ethiopian mini-markets. Sell when the internet drops, then sync. Cashiers never see buying price.',
+    features: [
+      'Phone register with several customers open at once',
+      'Shelf and back-store stock, with FIFO batches',
+      'Cash, Telebirr, and CBE splits on the receipt',
+      'Offline sales that queue on the phone and sync later',
+    ],
+    audience: 'Owners and cashiers of mini-markets, kiosks, and small shops in Ethiopia',
+    illustration: 'receipt',
   },
 ];

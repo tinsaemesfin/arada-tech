@@ -2,7 +2,7 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Breadcrumbs from '@components/global/Breadcrumbs.astro';
 import CTA from '@components/global/CTA.astro';
-import PortfolioDetailShowcase from '@components/portfolio/PortfolioDetailShowcase.astro';
+import ReceiptDrawing from '@components/products/ReceiptDrawing.astro';
 import { caseStudies } from '@data/portfolio';
 
 const study = caseStudies.find((s) => s.slug === 'arada-mart')!;
@@ -18,6 +18,14 @@ const structuredData = {
   description: study.challenge,
   url: new URL(`/portfolio/${study.slug}/`, Astro.site).href,
   creator: { '@type': 'Organization', name: 'Arada Tech', url: 'https://www.aradatech.com' },
+  about: {
+    '@type': 'SoftwareApplication',
+    name: 'Arada Mart',
+    url: study.liveUrl,
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web',
+    publisher: { '@id': 'https://www.aradatech.com/#organization' },
+  },
 };
 ---
 
@@ -28,19 +36,21 @@ const structuredData = {
     <div class="section-container max-w-4xl">
       <span class="text-sm font-medium text-secondary-400 uppercase tracking-wider mb-3 block reveal-up">{study.industry}</span>
       <h1 class="heading-xl mb-4 reveal-up">{study.title}</h1>
-      <div class="flex flex-wrap gap-2 mb-8 reveal-up">
+      <div class="flex flex-wrap gap-2 mb-6 reveal-up">
         {study.services.map((s) => (
           <span class="text-sm font-medium text-primary-600 bg-primary-50 px-3 py-1.5 rounded-full">{s}</span>
         ))}
       </div>
+      <a href={study.liveUrl} class="inline-flex items-center gap-2 font-mono text-sm font-medium text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-900 mb-8 reveal-up">
+        Visit the live product: mart.aradatech.com
+        <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M9 7h8v8" /></svg>
+      </a>
     </div>
   </article>
 
   <section class="section-padding pb-2">
-    <div class="section-container">
-      {study.coverImage && (
-        <PortfolioDetailShowcase slug={study.slug} title={study.title} coverImage={study.coverImage} />
-      )}
+    <div class="section-container flex justify-center">
+      <ReceiptDrawing class="h-48 w-36" />
     </div>
   </section>
 
@@ -91,12 +101,18 @@ const structuredData = {
     </div>
   </section>
 
-  <CTA variant="gradient" title="Building a Retail or POS System?" description="Tell us about your checkout flow, stock model, and offline needs — we can help design the right platform." />
+  <CTA
+    variant="gradient"
+    title="Running a shop in Ethiopia?"
+    description="Start a 14-day Arada Mart trial on your phone."
+    primaryText="Start the trial"
+    primaryHref="https://mart.aradatech.com/sign-up"
+    secondaryText="Visit the live product"
+    secondaryHref="https://mart.aradatech.com/"
+  />
 </BaseLayout>
 
 <script>
   import { initScrollAnimations } from '@scripts/scroll-animations';
-  import { initPortfolioIntro } from '@scripts/portfolio/portfolio-intro';
   initScrollAnimations();
-  initPortfolioIntro();
 </script>

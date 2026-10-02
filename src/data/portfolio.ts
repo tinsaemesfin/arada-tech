@@ -14,7 +14,7 @@ export interface CaseStudy {
   /** Hero / card image under `public/` (e.g. `/images/portfolio/slug.png`). */
   coverImage?: string;
   /** Drawn visual used instead of a screenshot (our own products). */
-  illustration?: 'rent-facade';
+  illustration?: 'rent-facade' | 'receipt';
   /** Live product URL, for in-house products. */
   liveUrl?: string;
   /** Homepage portfolio: order 1–3 shows this project in the featured row (first three slots). */
@@ -48,13 +48,15 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'arada-mart',
     title: 'Arada Mart — Retail POS & Inventory System',
-    client: 'Arada Mart',
+    client: 'Arada Tech (in-house product)',
     industry: 'Retail / FMCG',
-    services: ['Custom Software', 'Web App Development', 'UI/UX Design'],
+    services: ['SaaS Product', 'Web App Development', 'UI/UX Design'],
+    liveUrl: 'https://mart.aradatech.com/',
+    illustration: 'receipt',
     challenge:
-      'Small retail kiosks selling cosmetics, detergents, and fast-moving consumer goods often rely on spreadsheets and guesswork for stock. Cashiers need a fast, touch-friendly checkout on tablets during peak hours, while owners need accurate profit visibility, FIFO costing, and tight control over sensitive actions — all on connections that drop frequently.',
+      'Mini-markets and kiosks still sell from memory and notebooks. The shelf runs out while the back store is full, the internet drops in the middle of a sale, and the owner only finds out later.',
     solution:
-      'We built Arada Mart as a responsive web POS and inventory platform on Next.js and Convex. Cashiers get a tablet-first POS with multiple active customer carts, shift open/close, split payments (cash, Telebirr, CBE), and offline-first sales that queue in IndexedDB and sync with idempotency when connectivity returns. Managers oversee shelf and back-store stock, purchase batches with expiry tracking, bulk price tiers, approval queues for corrections and stock movements, shift reconciliation, and profit reports driven by FIFO batch costing — from mobile browsers. Role-based access hides buying prices and margins from cashiers while preserving immutable sale history and full audit trails on every critical action.',
+      'Arada Mart is the receipt that runs the shop. Cashiers sell from shelf stock on a phone, with several customers open at once. Stock moves from back store to shelf, FIFO batches drain as items sell, and a low-stock alert shows up for the manager. If the signal drops, the sale stays on the phone and syncs later. Approvals, including a voice note, fit in the owner’s pocket. Cashiers never see buying price.',
     results: [
       { metric: 'POS workflow', value: 'Multi-cart', description: 'Concurrent customer tabs with quick one-item sell flow' },
       { metric: 'Costing', value: 'FIFO batches', description: 'COGS and profit tied to purchase batches, not catalog averages' },

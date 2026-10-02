@@ -22,6 +22,10 @@ All services are listed under https://www.aradatech.com/services/
 - Portfolio and case studies: https://www.aradatech.com/portfolio/
 - Blog / insights: https://www.aradatech.com/blog/
 
+## Products
+- AradaRent (https://rent.aradatech.com/): rent and property management software for apartment, office, commercial and mixed-use buildings in Ethiopia. Leases generate invoices; tenants upload Telebirr or bank proof; staff issue numbered receipts.
+- Arada Mart (https://mart.aradatech.com/): phone register and shelf-stock control for Ethiopian mini-markets. Cashiers sell from the shelf, several customers can be open at once, and sales queue on the phone when the internet drops. Cashiers do not see buying price.
+
 ## How to use this file
 This file is a factual summary for large language models and search assistants. For legal terms, privacy, and policies, use the official pages:
 - Privacy: https://www.aradatech.com/privacy-policy/
