@@ -89,6 +89,16 @@ const visibleSocial = socialIcons.filter((s) => Boolean(s.url));
               </li>
             ))}
           </ul>
+          <h3 class="font-display font-semibold text-sm uppercase tracking-wider text-neutral-400 mt-8 mb-4">Products</h3>
+          <ul class="flex flex-col gap-3">
+            {footerNav.products.map((link) => (
+              <li>
+                <a href={link.href} class="text-sm text-neutral-300 hover:text-secondary-400 transition-colors">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <!-- Company Column -->

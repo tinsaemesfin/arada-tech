@@ -9,8 +9,10 @@ import TestimonialsSection from '@components/home/TestimonialsSection.astro';
 import BlogPreview from '@components/home/BlogPreview.astro';
 import CTA from '@components/global/CTA.astro';
 import MobileExperience from '@components/home/MobileExperience.astro';
+import ProductsSection from '@components/home/ProductsSection.astro';
 import { brandAssets, company } from '@data/company';
 import { services } from '@data/services';
+import { products } from '@data/products';
 
 const orgId = `${company.url}/#organization`;
 
@@ -19,6 +21,7 @@ const primaryNavItems = [
   { name: 'About', path: '/about/' },
   { name: 'Services', path: '/services/' },
   ...services.map((s) => ({ name: s.title, path: s.href })),
+  ...products.map((p) => ({ name: p.name, path: p.url })),
   { name: 'Portfolio', path: '/portfolio/' },
   { name: 'Blog', path: '/blog/' },
   { name: 'Contact', path: '/contact/' },
@@ -99,20 +102,37 @@ const structuredData = [
     sameAs: Object.values(company.social).filter(Boolean),
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
-      name: 'Software Development Services',
-      itemListElement: services.map((s) => {
-        const serviceUrl = new URL(s.href, Astro.site).href;
-        return {
+      name: 'Software Products and Development Services',
+      itemListElement: [
+        ...products.map((p) => ({
           '@type': 'Offer',
-          url: serviceUrl,
+          url: p.url,
+          priceCurrency: 'ETB',
           itemOffered: {
-            '@type': 'Service',
-            name: s.title,
-            description: s.tagline,
-            url: serviceUrl,
+            '@type': 'SoftwareApplication',
+            name: p.name,
+            description: p.description,
+            url: p.url,
+            applicationCategory: 'BusinessApplication',
+            applicationSubCategory: p.category,
+            operatingSystem: 'Web',
+            publisher: { '@id': orgId },
           },
-        };
-      }),
+        })),
+        ...services.map((s) => {
+          const serviceUrl = new URL(s.href, Astro.site).href;
+          return {
+            '@type': 'Offer',
+            url: serviceUrl,
+            itemOffered: {
+              '@type': 'Service',
+              name: s.title,
+              description: s.tagline,
+              url: serviceUrl,
+            },
+          };
+        }),
+      ],
     },
   },
   {
@@ -172,6 +192,11 @@ const structuredData = [
   {/* Desktop: full sections (hidden on mobile) */}
   <div class="hidden md:block">
     <ServicesGrid />
+  </div>
+
+  <ProductsSection />
+
+  <div class="hidden md:block">
     <WhyChooseUs />
     <ProcessSection />
     <PortfolioShowcase />

@@ -1,8 +1,17 @@
+import { products } from './products';
+
 export interface NavItem {
   label: string;
   href: string;
+  external?: boolean;
   children?: NavItem[];
 }
+
+const productLinks: NavItem[] = products.map((p) => ({
+  label: `${p.name}: ${p.category}`,
+  href: p.url,
+  external: true,
+}));
 
 export const mainNav: NavItem[] = [
   { label: 'Home', href: '/' },
@@ -18,6 +27,7 @@ export const mainNav: NavItem[] = [
       { label: 'UI/UX Design', href: '/services/ui-ux-design/' },
     ],
   },
+  { label: 'Products', href: '/#products', children: productLinks },
   { label: 'Portfolio', href: '/portfolio/' },
   { label: 'Blog', href: '/blog/' },
   { label: 'Contact', href: '/contact/' },
@@ -31,6 +41,7 @@ export const footerNav = {
     { label: 'Custom Software', href: '/services/custom-software-development/' },
     { label: 'UI/UX Design', href: '/services/ui-ux-design/' },
   ],
+  products: productLinks,
   company: [
     { label: 'About Us', href: '/about/' },
     { label: 'Portfolio', href: '/portfolio/' },

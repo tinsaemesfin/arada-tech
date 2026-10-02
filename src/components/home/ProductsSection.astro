@@ -1,0 +1,42 @@
+---
+import { products } from '@data/products';
+---
+
+<section class="section-gap bg-white border-t border-neutral-200/80" id="products" aria-labelledby="products-heading">
+  <div class="section-padding">
+    <div class="section-container">
+      <div class="max-w-2xl mb-10 reveal-up">
+        <span class="text-sm font-semibold text-secondary-400 uppercase tracking-wider mb-3 block">Our Products</span>
+        <h2 id="products-heading" class="heading-lg mb-4">Software we build and run ourselves</h2>
+        <p class="prose-content">Alongside client work, we ship our own products for Ethiopian businesses. Each one is priced in birr and supported by the same team in Addis Ababa.</p>
+      </div>
+
+      <div class="grid grid-cols-1 gap-6">
+        {products.map((product) => (
+          <article class="rounded-2xl border border-neutral-200 bg-neutral-50 p-6 md:p-10 grid gap-8 md:grid-cols-[1.1fr_1fr] reveal-up">
+            <div>
+              <p class="text-sm font-medium text-primary-500 mb-2">{product.category}</p>
+              <h3 class="heading-md text-neutral-900 mb-4">
+                <a href={product.url} class="hover:text-primary-500 transition-colors">{product.name}</a>
+              </h3>
+              <p class="text-neutral-700 leading-relaxed mb-4">{product.description}</p>
+              <p class="text-sm text-neutral-600 mb-6"><span class="font-medium text-neutral-800">Built for:</span> {product.audience}</p>
+              <a href={product.url} class="btn-primary">
+                Visit {product.name}
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+              </a>
+            </div>
+            <ul class="flex flex-col gap-3 self-center">
+              {product.features.map((feature) => (
+                <li class="flex items-start gap-3 text-sm text-neutral-700">
+                  <svg class="w-5 h-5 mt-0.5 text-primary-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
