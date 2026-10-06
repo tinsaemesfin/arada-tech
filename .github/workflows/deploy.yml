@@ -2,8 +2,8 @@ name: Deploy Astro to cPanel
 
 on:
   push:
-    branches:
-      - main
+    branches: [main, master]
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
