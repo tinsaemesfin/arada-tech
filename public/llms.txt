@@ -28,6 +28,7 @@ Custom websites, web applications, mobile apps (iOS/Android and cross-platform),
 - About: https://www.aradatech.com/about/
 - Contact: https://www.aradatech.com/contact/
 - FAQ: https://www.aradatech.com/faq/
+- Founder portfolio (Tinsae Mesfin, Product Engineer): https://www.aradatech.com/tinsae/
 
 ## Products
 - AradaRent: https://rent.aradatech.com/ — rent and property management for buildings in Ethiopia.
